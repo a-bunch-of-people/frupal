@@ -7,16 +7,14 @@
     contains user interface
  */
 
-#include "menu.h"
-
-void menu::welcome()
+void Menu::welcome()
 {
 	cout << "\nWelcome to Frupal\n";
 	cout << "\nAn adventure game set on the island of Frupal\n";
-	cout << "\nAdam Davis, Bradley Thompson, David Djaernes, Dmitri McGulty, Ryan Jones, Yiwei Deng, and Russ Pedersen\n";
+	cout << "\nAdam Davis, Bradley Thompson, David Djaernes, Dmitri McGuckin, Ryan Jones, Yiwei Deng, and Russ Pedersen\n";
 }
 
-void menu::setup()
+void Menu::setup()
 {
 	cout << "\nSetup the game:\n";
 	int m_width = get_width();
@@ -29,7 +27,7 @@ void menu::setup()
 	cout << "\nWhich obstacles do you want to start with?\n";
 	cin >> input_obstacles;
 	cin.ignore(100,'\n');
-	game my_game = new game(m_width, m_height, energy, money, input_tools, input_obstacles);
+	// game my_game = new game(m_width, m_height, energy, money, input_tools, input_obstacles);
 }	
 
 /*
@@ -37,7 +35,7 @@ A function to set the width of the map
 no parameters
 returns width of the map
 */
-int menu::get_width()
+int Menu::get_width()
 {
 	cout << "\nHow wide do you want the map?\n";
 	int map_width = 0;
@@ -59,7 +57,7 @@ A function to set the height of the map
 no parameters
 returns height of the map
 */
-int menu::get_height()
+int Menu::get_height()
 {
 	cout << "\nHow deep do you want the map?\n";\
 	int map_height = 0;
@@ -81,7 +79,7 @@ A function to set the player's starting energy level
 no parameters
 returns player's starting energy
 */
-int menu::get_energy()
+int Menu::get_energy()
 {
 	cout << "\nHow much energy do you want to have at the start?\n";\
 	int player_energy = 0;
@@ -103,7 +101,7 @@ A function to set the player's starting money level
 no parameters
 returns player's starting money
 */
-int menu::get_money()
+int Menu::get_money()
 {
 	cout << "\nHow much money do you want to have at the start?\n";\
 	int player_money = 0;

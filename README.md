@@ -1,3 +1,9 @@
-## Here lies the hopes and dreams of this collective group . . .
+# Frupal General Information
 
-### [Trello Board](https://trello.com/b/8XPxP34C/game)
+### Hotkeys-n-Stuff
+
+* Debug Mode: CTRL+F5
+
+### Important Links:
+
+* [Trello Board](https://trello.com/b/8XPxP34C/game)

@@ -23,7 +23,7 @@ int m_width, m_height, energy, money;
 char response;
 char choice;
 
-class menu
+class Menu
 {
         public:
                 void welcome();
@@ -36,11 +36,5 @@ class menu
                 int get_energy();
                 int get_money();
 };
-
-class game{
-        public:
-                game();
-                ~game();
-}
 
 #endif

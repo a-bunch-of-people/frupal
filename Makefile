@@ -1,7 +1,7 @@
 CC=g++
 FLAGS=-g3 -Wall
-HEAD=driver.h menu.h
-SRC=driver.cpp menu.cpp
+HEAD=driver.h pch.h
+SRC=driver.cpp pch.cpp
 EXE=frupal
 
 VAL=valgrind
