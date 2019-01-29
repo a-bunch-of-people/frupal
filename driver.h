@@ -11,6 +11,7 @@
 // Local Libraries
 #include "menu.h"
 #include "pch.h"
+#include "terrain.h"
 
 using namespace std;
 

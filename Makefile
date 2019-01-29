@@ -15,6 +15,17 @@ execute:	all
 
 e:	execute
 
+# Custom Compile
+
+menu: driver.h menu.h
+	$(CC) $(FLAGS) driver.cpp menu.cpp -o $(EXE)
+
+terrain: driver.h terrain.h
+	$(CC) $(FLAGS) driver.cpp terrain.cpp -o $(EXE)
+
+pch: driver.h pch.h
+	$(CC) $(FLAGS) driver.cpp pch.cpp -o $(EXE)
+
 flagless:
 	$(CC) $(SRC) -o $(EXE)
 

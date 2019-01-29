@@ -8,7 +8,7 @@
 
 int main(const int argc, const char* argv[])
 {
-        int input = 0;
+/*        int input = 0;
         cout << "GameSpace\n\n\n";
 
         cout << "Enter the size of the board you would like.";
@@ -19,7 +19,7 @@ int main(const int argc, const char* argv[])
 
         board.showBoard();
         board.showTerrain();
-        board.showALL();
+        board.showALL();*/
 
         return 0;
 }
