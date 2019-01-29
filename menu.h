@@ -1,8 +1,8 @@
 /*
-    menu.h
-    User Interface for Frupal project
-    Russ Pedersen CS300
-    contains user interface
+        menu.h
+        User Interface for Frupal project
+        Russ Pedersen CS300
+        contains user interface
 */
 
 #ifndef FRUPAL_MENU_H
@@ -25,16 +25,22 @@ char choice;
 
 class menu
 {
-	public:
-		void welcome();
-		void setup();
-	
-	
-	private:
-		int get_width();
-		int get_height();
-		int get_energy();
-		int get_money();
+        public:
+                void welcome();
+                void setup();
+
+
+        private:
+                int get_width();
+                int get_height();
+                int get_energy();
+                int get_money();
 };
- 
+
+class game{
+        public:
+                game();
+                ~game();
+}
+
 #endif

@@ -1,9 +1,11 @@
-// pch.cpp: source file corresponding to pre-compiled header
-// library definitions for Board class. 
 #include "pch.h"
-#include <iostream>
-#include <time.h>
-#include <random>
+
+/*
+    pch.cpp
+    source file corresponding to pre-compiled header
+    library definitions for Board class. 
+*/
+
 // constructor with parameter
 Board::Board(int matrixSize) : userInput(matrixSize) {
 	//Allocated pointer memory
@@ -31,7 +33,7 @@ void Board::setBoard()
 			gameSpace[i][j].terrain = fillSpaces(randomOutput());
 			gameSpace[i][j].extThings = fillExternals(randomOutput());
 		}
-		std::cout << std::endl;
+		cout << endl;
 	}
 }
 
@@ -39,11 +41,11 @@ void Board::setBoard()
 // function to generate random numbers. 
 int Board::randomOutput()
 {
-	typedef std::mt19937 myRNG;  // the Mersenne Twister with a popular choice of parameters
+	typedef mt19937 myRNG;  // the Mersenne Twister with a popular choice of parameters
 	myRNG rng;                   
 	rng.seed(time(NULL));
-	std::uniform_int_distribution<int> dist(1, 9); // range [1,9]
-	std::random_device rand;
+	uniform_int_distribution<int> dist(1, 9); // range [1,9]
+	random_device rand;
 	return dist(rand);
 }
 
@@ -113,25 +115,25 @@ char Board::fillExternals(int rndInput) {
 //initially shows all _ as they haven't been anywhere yet
 void Board::showBoard()
 {
-	std::cout << "\n\nfyi, showBoard() function\n\n";
+	cout << "\n\nfyi, showBoard() function\n\n";
 	for (int i = 0; i < userInput; ++i) {		
 		for (int j = 0; j < userInput; ++j)		
-			std::cout <<" " << gameSpace[i][j].unknownBlank << " " ;
-		std::cout << std::endl;
+			cout <<" " << gameSpace[i][j].unknownBlank << " " ;
+		cout << endl;
 	}
 }
 
 void Board::showTerrain() {
 	/*if (gameSpace == nullptr)	// check may not be necessary since player won't get here unless they
-		std::cout << "empty board\n\n"; // have already allocated the size.
+		cout << "empty board\n\n"; // have already allocated the size.
 	else
-		std::cout << "board full\n\n";*/
-	std::cout << "\n\nfyi, showTerrain() function \n\n";
+		cout << "board full\n\n";*/
+	cout << "\n\nfyi, showTerrain() function \n\n";
 	for (int i = 0; i < userInput; ++i) {
 		for (int j = 0; j < userInput; ++j) {
-			std::cout << " " << gameSpace[i][j].terrain << " ";
+			cout << " " << gameSpace[i][j].terrain << " ";
 		}
-		std::cout << std::endl;
+		cout << endl;
 	}
 }
 
@@ -139,17 +141,17 @@ void Board::showTerrain() {
 void Board::showALL()
 {
 	/*if (gameSpace == nullptr)
-		std::cout << "empty board\n\n";
+		cout << "empty board\n\n";
 	else
-		std::cout << "board full\n\n";*/
-	std::cout << "\n\nfyi, showAll function() \n\n";
+		cout << "board full\n\n";*/
+	cout << "\n\nfyi, showAll function() \n\n";
 	for (int i = 0; i < userInput; ++i) {
 		for (int j = 0; j < userInput; ++j) {
 			gameSpace[i][j].terrain = fillSpaces(randomOutput());
 			gameSpace[i][j].extThings = fillExternals(randomOutput());
-			std::cout << " " << gameSpace[i][j].terrain;
-			std::cout << gameSpace[i][j].extThings;
+			cout << " " << gameSpace[i][j].terrain;
+			cout << gameSpace[i][j].extThings;
 		}
-		std::cout << std::endl;
+		cout << endl;
 	}
 }

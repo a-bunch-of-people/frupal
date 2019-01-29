@@ -6,7 +6,7 @@
     Debug program: F5 or Debug > Start Debugging menu
 */
 
-int main(const int argc, const char* argc[])
+int main(const int argc, const char* argv[])
 {
 	int input = 0;
 	cout << "GameSpace\n\n\n";

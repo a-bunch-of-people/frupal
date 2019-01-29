@@ -3,6 +3,12 @@
 #ifndef FRUPAL_PCH_H
 #define FRUPAL_PCH_H
 
+#include <iostream>
+#include <time.h>
+#include <random>
+
+using namespace std;
+
 struct boardSpace {
 	char terrain;
 	char extThings;

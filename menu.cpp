@@ -1,7 +1,7 @@
 #include "menu.h"
 
 /*
-   menu.cpp
+    menu.cpp
     User Interface for Frupal project
     Russ Pedersen CS300
     contains user interface
