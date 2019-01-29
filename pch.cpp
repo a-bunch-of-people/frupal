@@ -1,14 +1,9 @@
 // pch.cpp: source file corresponding to pre-compiled header
 // library definitions for Board class. 
-
-
 #include "pch.h"
 #include <iostream>
 #include <time.h>
 #include <random>
-
-
-
 // constructor with parameter
 Board::Board(int matrixSize) : userInput(matrixSize) {
 	//Allocated pointer memory

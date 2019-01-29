@@ -1,22 +1,13 @@
-/*menu.cpp
-  User Interface for Frupal project
-  Russ Pedersen CS300
-  contains user interface
- */
-#include <iostream>
-#include <iomanip>
-#include <cctype>
-#include <cstring>
-#include <cstdlib>
 #include "menu.h"
-using namespace std;
 
-const int MAX = 100;
+/*
+   menu.cpp
+    User Interface for Frupal project
+    Russ Pedersen CS300
+    contains user interface
+ */
 
-char input_tools[MAX], input_obstacles[MAX];
-int m_width, m_height, energy, money;
-char response;
-char choice;
+#include "menu.h"
 
 void menu::welcome()
 {
@@ -128,5 +119,3 @@ int menu::get_money()
 	
 	return player_money;
 }
-
-
