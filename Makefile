@@ -1,5 +1,5 @@
 CC=g++
-FLAGS=-g3 -Wall
+FLAGS=-g3 -Wall -std=c++11
 
 HEAD=driver.h pch.h
 SRC=driver.cpp pch.cpp
