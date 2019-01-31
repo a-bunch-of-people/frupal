@@ -3,9 +3,6 @@ compiler:
         - g++
 os: linux
 
-before_install:
-        - make test
-
 jobs:
         include:
                 - stage: test
