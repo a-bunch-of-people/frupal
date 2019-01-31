@@ -28,11 +28,16 @@ terrain: driver.h terrain.h
 pch: driver.h pch.h
 	$(CC) $(FLAGS) driver.cpp pch.cpp -o $(EXE)
 
+<<<<<<< HEAD
 #
 # Unit Tests
 #
 test: $(TESTS)
 	$(CC) $(FLAGS) $^ -o tests/$@
+=======
+tests: 
+	$(CC) $(FLAGS) $(TESTS) -o tests/ALL_TESTS
+>>>>>>> master
 
 #
 # Base Compilation options

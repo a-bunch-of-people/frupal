@@ -1,7 +1,14 @@
 #include <iostream>
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
 
 using namespace std;
 
-int main(const int argc, const char** argv) {
-    cout << "Hello World" << endl; 
+const bool a = true;
+const bool b = false;
+
+TEST_CASE("Values are computed", "[values]") {
+    REQUIRE(a == true);
+    REQUIRE(b == false);
+    REQUIRE(b == true);
 }

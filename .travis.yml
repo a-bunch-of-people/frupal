@@ -1,16 +1,18 @@
+# Default build settings
+
 language: c++
-
-compiler:
-    - g++
+compiler: g++
 os: linux
+fast_finish: true
+# notifications:
+#     slack: frupal-dev:EqKuho9NXtDZzAyzMpRTr1pM
 
-before_install:
-    - make test
+branches:
+    only:
+        - master
+        - stable  
+        - dmitri-dev
 
-jobs:
-    include:
-            - stage: test
-            - script: tests/test
+install: make tests
 
-notifications:
-    slack: frupal-dev:EqKuho9NXtDZzAyzMpRTr1pM
+script: tests/ALL_TESTS
