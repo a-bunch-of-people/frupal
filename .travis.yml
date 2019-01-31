@@ -1,12 +1,16 @@
 language: c++
+
 compiler:
-        - g++
+    - g++
 os: linux
 
 before_install:
-        - make test
+    - make test
 
 jobs:
-        include:
-                - stage: test
-                - script: tests/test
+    include:
+            - stage: test
+            - script: tests/test
+
+notifications:
+    slack: frupal-dev:EqKuho9NXtDZzAyzMpRTr1pM

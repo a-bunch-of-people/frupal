@@ -16,8 +16,9 @@ execute:	all
 
 e:	execute
 
+#
 # Custom Compile
-
+#
 menu: driver.h menu.h
 	$(CC) $(FLAGS) driver.cpp menu.cpp -o $(EXE)
 
@@ -27,9 +28,15 @@ terrain: driver.h terrain.h
 pch: driver.h pch.h
 	$(CC) $(FLAGS) driver.cpp pch.cpp -o $(EXE)
 
-test: 
-	$(CC) $(FLAGS) $(TESTS) -o tests/test
+#
+# Unit Tests
+#
+test: $(TESTS)
+	$(CC) $(FLAGS) $^ -o tests/$@
 
+#
+# Base Compilation options
+#
 flagless:
 	$(CC) $(SRC) -o $(EXE)
 
@@ -40,6 +47,9 @@ valgrind:	$(EXE)
 
 v:	valgrind
 
+#
+# Utilities
+#
 clean:
 	rm -rf $(EXE) *.o
 
