@@ -26,7 +26,11 @@ namespace frupal_utils {
     }
   }
 
-  void load_textures(TextureMap& textures) {
+  void load_textures(TextureMap &textures) {
+    load_textures(textures, "textures/terrain.texture");
+  }
+
+  void load_textures(TextureMap &textures, const char* filename) {
     int i = 0;
     char** tile_types = new char*[MAX_STREAM_SIZE];
     char* temp_textures = new char[MAX_STREAM_SIZE];
@@ -35,7 +39,7 @@ namespace frupal_utils {
     char* type = new char[MAX_STREAM_SIZE];
     char* texture = new char[MAX_STREAM_SIZE];
 
-    file.open("textures/terrain.texture");
+    file.open(filename);
 
     while(!file.eof()) {
       file.get(type, MAX_STREAM_SIZE, ';');
