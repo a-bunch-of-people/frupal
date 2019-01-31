@@ -30,6 +30,7 @@ void Board::setBoard()
 			gameSpace[i][j].unknownBlank = '_';
 			gameSpace[i][j].terrain = fillSpaces(randomOutput());
 			gameSpace[i][j].extThings = fillExternals(randomOutput());
+			gameSpace[i][j].mask = 0;
 		}
 		std::cout << std::endl;
 	}
@@ -152,4 +153,12 @@ void Board::showALL()
 		}
 		std::cout << std::endl;
 	}
+}
+
+// this function updates mask variable from 0 to 1 when player visits a specific tile
+void Board::visited(int x, int y) {
+	// purpose of this function is to track which tiles player has visited. 
+	// recieves input as (x, y) coordinate
+	// updates mask from 0 to 1 for a visited space
+	
 }

@@ -4,10 +4,15 @@
 #ifndef PCH_H
 #define PCH_H
 
+#include <iostream>
+#include <time.h>
+#include <random>
+
 struct boardSpace {
 	char terrain;
 	char extThings;
 	char unknownBlank;
+	int mask;
 };
 
 
@@ -25,6 +30,7 @@ private:
 	int randomOutput();					// generates a random number
 	char fillSpaces(int rndInput);		// fills the matrix with terrain 
 	char fillExternals(int rndInput);	// fills the matrix with extras 
+	void visited(int x, int y);			// updates tile from unseen 0 to seen 1
 
 
 	boardSpace** gameSpace;  // struct that has 3 qualities. 
