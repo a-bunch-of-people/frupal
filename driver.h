@@ -7,10 +7,15 @@
 
 // Standard Libraries
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
 
 // Local Libraries
-#include "terrain.h"
+#include "terrain/terrain.h"
+#include "utilities/utilities.h"
 
 using namespace std;
+using namespace frupal_utils;
 
 #endif
