@@ -8,18 +8,5 @@
 
 int main(const int argc, const char* argv[])
 {
-/*        int input = 0;
-        cout << "GameSpace\n\n\n";
-
-        cout << "Enter the size of the board you would like.";
-        cout <<"\nFor example, enter 20, if you want a 20x20 square, or 30 for a 30x30 square\n";
-        cin >> input;
-
-        Board board(input);
-
-        board.showBoard();
-        board.showTerrain();
-        board.showALL();*/
-
         return 0;
 }
