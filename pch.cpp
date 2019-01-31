@@ -1,4 +1,4 @@
-// pch.cpp: source file corresponding to pre-compiled header
+// pch.cpp: source file corresponding pch.h
 // library definitions for Board class. 
 
 #include "pch.h"
@@ -43,7 +43,7 @@ int Board::randomOutput()
 	typedef std::mt19937 myRNG;  // the Mersenne Twister with a popular choice of parameters
 	myRNG rng;                   
 	rng.seed(time(NULL));
-	std::uniform_int_distribution<int> dist(1, 9); // range [1,9]
+	std::uniform_int_distribution<int> dist(1, 19); // range [1,19]
 	std::random_device rand;
 	return dist(rand);
 }
@@ -54,23 +54,34 @@ char Board::fillSpaces(int rndInput) {
 
 	switch (rndInput)
 	{
-	case 1: if (rndInput == 1) val = 'm';   // m for meadow
-		return val;
-	case 2: if (rndInput == 2) val = 'm';   // m for meadow
+	case 1: 
+	case 2:
+	case 3: 
+	case 4:
+	case 5:
+		if (rndInput >= 1 || rndInput <= 5) val = 'm';   // m for meadow
 		return val;							// repeated this value to weight output to be more mmeadow than the rest
-	case 3: if (rndInput = 3) val = '^';	// ^ for rocks
+	case 6: if (rndInput = 6) val = '^';	// ^ for rocks
 		return val;
-	case 4: if (rndInput = 4) val = 'w';	// w for water
+	case 7: if (rndInput = 7) val = 'w';	// w for water
 		return val;
-	case 5: if (rndInput = 5) val = '~';	// ~ for bog
+	case 8: if (rndInput = 8) val = '~';	// ~ for bog
 		return val;
-	case 6: if (rndInput = 6) val = '!';	// ! for tree
+	case 9: if (rndInput = 9) val = '!';	// ! for tree
 		return val;
-	case 7: if (rndInput = 7) val = 'm';	// m for more meadows
+	case 10: if (rndInput = 10) val = 'w';	// w for water
 		return val;
-	case 8: if (rndInput = 8) val = 'm';	// m same
-		return val; 
-	case 9: if (rndInput = 9) val = '^';	// ^ rocks
+	case 11: if (rndInput = 11) val = '^';	// ^ for rock
+		return val;
+	case 12:
+	case 13: 
+	case 14: 
+	case 15:
+	case 16:
+	case 17: 
+	case 18: 
+	case 19:	
+		if (rndInput >= 12 || rndInput <= 19) val = 'm';	// ^ rocks
 		return val;
 
 	default:
@@ -102,6 +113,26 @@ char Board::fillExternals(int rndInput) {
 		return val;
 	case 9: if (rndInput = 9) val = '_';	// _ same
 		return val;
+	case 10: if (rndInput == 1) val = 'J';	// J for jewels
+		return val;
+	case 11: if (rndInput == 2) val = '$';	// $ money
+		return val;
+	case 12: if (rndInput = 3) val = 'C';	// C for clues
+		return val;
+	case 13: if (rndInput = 4) val = '_';	// _ for empty space
+		return val;
+	case 14: if (rndInput = 5) val = '_';	// _ for empty space
+		return val;
+	case 15: if (rndInput = 6) val = '_';	// _ same
+		return val;
+	case 16: if (rndInput = 7) val = 'L';	// L for something. 
+		return val;
+	case 17: if (rndInput = 8) val = '_';	// _ empty
+		return val;
+	case 18: if (rndInput = 9) val = '_';	// _ same
+		return val;
+	case 19: if (rndInput = 9) val = '_';	// _ same
+		return val;
 
 	default:
 		return val;
@@ -123,10 +154,6 @@ void Board::showBoard()
 }
 
 void Board::showTerrain() {
-	/*if (gameSpace == nullptr)	// check may not be necessary since player won't get here unless they
-		std::cout << "empty board\n\n"; // have already allocated the size.
-	else
-		std::cout << "board full\n\n";*/
 	std::cout << "\n\nfyi, showTerrain() function \n\n";
 	for (int i = 0; i < userInput; ++i) {
 		for (int j = 0; j < userInput; ++j) {
@@ -139,11 +166,7 @@ void Board::showTerrain() {
 
 void Board::showALL()
 {
-	/*if (gameSpace == nullptr)
-		std::cout << "empty board\n\n";
-	else
-		std::cout << "board full\n\n";*/
-	std::cout << "\n\nfyi, showAll function() \n\n";
+	std::cout << "\n\n fyi, showAll function() \n\n"; // just fyi to developers. 
 	for (int i = 0; i < userInput; ++i) {
 		for (int j = 0; j < userInput; ++j) {
 			gameSpace[i][j].terrain = fillSpaces(randomOutput());
