@@ -2,6 +2,7 @@ CC=g++
 FLAGS=-g3 -Wall
 HEAD=driver.h pch.h
 SRC=driver.cpp pch.cpp
+TESTS=tests/*.cpp
 EXE=frupal
 
 VAL=valgrind
@@ -25,6 +26,9 @@ terrain: driver.h terrain.h
 
 pch: driver.h pch.h
 	$(CC) $(FLAGS) driver.cpp pch.cpp -o $(EXE)
+
+test: 
+	$(CC) $(FLAGS) $(TESTS) -o tests/test
 
 flagless:
 	$(CC) $(SRC) -o $(EXE)
