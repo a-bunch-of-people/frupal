@@ -1,8 +1,11 @@
 CC=g++
-FLAGS=-g3 -Wall
+FLAGS=-g3 -Wall -std=c++11
+
 HEAD=driver.h pch.h
 SRC=driver.cpp pch.cpp
 TESTS=tests/*.cpp
+
+TEST_EXE=tests/ALL_TESTS
 EXE=frupal
 
 VAL=valgrind
@@ -16,8 +19,6 @@ execute:	all
 
 e:	execute
 
-# Custom Compile
-
 menu: driver.h menu.h
 	$(CC) $(FLAGS) driver.cpp menu.cpp -o $(EXE)
 
@@ -27,8 +28,8 @@ terrain: driver.h terrain.h
 pch: driver.h pch.h
 	$(CC) $(FLAGS) driver.cpp pch.cpp -o $(EXE)
 
-test: 
-	$(CC) $(FLAGS) $(TESTS) -o tests/test
+test:
+	$(CC) $(FLAGS) $(TESTS) -o $(TEST_EXE)
 
 flagless:
 	$(CC) $(SRC) -o $(EXE)
@@ -41,6 +42,6 @@ valgrind:	$(EXE)
 v:	valgrind
 
 clean:
-	rm -rf $(EXE) *.o
+	rm -rf $(EXE) $(TEST_EXE) *.o
 
 c:	clean

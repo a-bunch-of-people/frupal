@@ -10,5 +10,7 @@ const bool b = false;
 TEST_CASE("Values are computed", "[values]") {
     REQUIRE(a == true);
     REQUIRE(b == false);
-    REQUIRE(b == true);
+
+    REQUIRE(b == false);
+    REQUIRE(a == true);
 }
