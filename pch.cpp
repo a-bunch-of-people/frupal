@@ -1,12 +1,7 @@
 // pch.cpp: source file corresponding to pre-compiled header
 // library definitions for Board class. 
 
-// here is a new comment @@@((
 #include "pch.h"
-#include <iostream>
-#include <time.h>
-#include <random>
-
 
 
 // constructor with parameter
@@ -94,7 +89,7 @@ char Board::fillExternals(int rndInput) {
 		return val;
 	case 3: if (rndInput = 3) val = 'C';	// C for clues
 		return val;
-	case 4: if (rndInput = 4) val = 'B';	// B for energy bars
+	case 4: if (rndInput = 4) val = '_';	// _ for empty space
 		return val;
 	case 5: if (rndInput = 5) val = '_';	// _ for empty space
 		return val;
