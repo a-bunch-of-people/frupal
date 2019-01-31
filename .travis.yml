@@ -13,6 +13,6 @@ branches:
         - stable  
         - dmitri-dev
 
-install: make tests
+install: make test
 
 script: tests/ALL_TESTS
