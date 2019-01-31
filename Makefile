@@ -27,8 +27,8 @@ terrain: driver.h terrain.h
 pch: driver.h pch.h
 	$(CC) $(FLAGS) driver.cpp pch.cpp -o $(EXE)
 
-test: 
-	$(CC) $(FLAGS) $(TESTS) -o tests/test
+tests: 
+	$(CC) $(FLAGS) $(TESTS) -o tests/ALL_TESTS
 
 flagless:
 	$(CC) $(SRC) -o $(EXE)

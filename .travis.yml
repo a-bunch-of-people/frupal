@@ -1,9 +1,16 @@
-language: c++
-compiler:
-        - g++
-os: linux
+# Default build settings
 
-jobs:
-        include:
-                - stage: test
-                - script: tests/test
+language: c++
+compiler: g++
+os: linux
+fast_finish: true
+
+branches:
+    only:
+        - master
+        - stable  
+        - dmitri-dev
+
+install: make tests
+
+script: tests/ALL_TESTS
