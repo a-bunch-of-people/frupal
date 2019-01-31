@@ -4,8 +4,8 @@ language: c++
 compiler: g++
 os: linux
 # fast_finish: true
-# notifications:
-#     slack: frupal-dev:EqKuho9NXtDZzAyzMpRTr1pM
+notifications:
+    slack: frupal-dev:EqKuho9NXtDZzAyzMpRTr1pM
 
 branches:
     only:
