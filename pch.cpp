@@ -50,7 +50,7 @@ int Board::randomOutput()
 
 // function to fill board spaces with a terrain quality
 char Board::fillSpaces(int rndInput) {
-	char val = 'Q'; //initial value. 
+	char val = 'm'; //initial value. 
 
 	switch (rndInput)
 	{
@@ -169,8 +169,8 @@ void Board::showALL()
 	std::cout << "\n\n fyi, showAll function() \n\n"; // just fyi to developers. 
 	for (int i = 0; i < userInput; ++i) {
 		for (int j = 0; j < userInput; ++j) {
-			gameSpace[i][j].terrain = fillSpaces(randomOutput());
-			gameSpace[i][j].extThings = fillExternals(randomOutput());
+			//gameSpace[i][j].terrain = fillSpaces(randomOutput());
+			//gameSpace[i][j].extThings = fillExternals(randomOutput());
 			std::cout << " " << gameSpace[i][j].terrain;
 			std::cout << gameSpace[i][j].extThings;
 		}

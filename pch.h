@@ -1,4 +1,4 @@
-// class for gamespace area
+// obects for gamespace area
 
 
 #ifndef PCH_H
@@ -33,10 +33,11 @@ private:
 	void visited(int x, int y);			// updates tile from unseen 0 to seen 1
 
 
-	boardSpace** gameSpace;  // struct that has 3 qualities. 
+	boardSpace** gameSpace;  // struct that has 4 qualities. 
 							 // blank space for user to uncover
 							 // space with terrain 
 							 // space with the extra thing like food, jewels, etc
+							 // and a tracker to keep track of which tile has been seen
 	int userInput;			 // variable for user input on matrix size
 
 };
