@@ -1,5 +1,7 @@
 # Frupal General Information
 
+### Last Build: [![Build Status](https://travis-ci.org/a-bunch-of-people/frupal.svg?branch=master)](https://travis-ci.org/a-bunch-of-people/frupal)
+
 ### Hotkeys-n-Stuff
 
 * Debug Mode: CTRL+F5
