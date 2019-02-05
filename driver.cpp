@@ -34,7 +34,7 @@ int main(const int argc, const char* argv[]) {
       cout << tiles[i]->texture();
 
       if((i % LENGTH) == 0)
-        cout << endl;
+        cout << endl << "\t";
     }
   }
   catch(NULL_TEXTURE e){
