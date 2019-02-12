@@ -10,7 +10,7 @@
 using namespace std;
 
 struct boardSpace {
-	char terrain;
+	TerrainTile terrain;
 	char extThings;
 	char unknownBlank;
 	int mask;
@@ -19,7 +19,6 @@ struct boardSpace {
 
 class Board {
 public:
-
 	Board(int userInput);	//constructor
 	void showBoard();		// user can display board from main
 	void showTerrain();		// user can display all the board
