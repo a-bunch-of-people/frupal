@@ -2,6 +2,7 @@
 // library definitions for Board class.
 
 #include "pch.h"
+#include "terrain.h"
 
 
 // constructor with parameter
