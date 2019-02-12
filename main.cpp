@@ -7,11 +7,15 @@ int main()
     char * name = new char[strlen("Speenies") + 1];
     strcpy(name, "Speenies");
     int gold = 1000;
-    int energy = 50;
 
     // x, y, name, money, energy
-    creature Speenies(x, y, name, gold, energy);
+    creature Speenies(x, y, name, gold);
     Speenies.display();
+
+    pos test_pos(7, 7);
+    Speenies.print_pos();
+    Speenies.set_pos(test_pos);
+    Speenies.print_pos();
 
     delete [] name;
 
