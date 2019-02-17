@@ -16,7 +16,6 @@ int main() {
 		cin >> choice;
 		choice = toupper(choice);
 		cout << "This was your choice: " << choice << endl;
-
 	}
 	while(toupper(choice) != 'Q' && finish == false);
 
