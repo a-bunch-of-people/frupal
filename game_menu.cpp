@@ -34,7 +34,7 @@ void menu::gameConfig(string * options)
 	ifstream infile("config.txt");
 	if( infile.is_open())
 	{
-		cout << "\nconfig opened\n" << endl;		
+		cout << "\nconfig opened" << endl;		
 		string line;	
 		
 		while( getline (infile, line))
