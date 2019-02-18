@@ -1,3 +1,6 @@
+#ifndef FRUPAL_MENU_H
+#define FRUPAL_MENU_H
+
 #include <cctype> 
 #include <iostream> 
 #include <cstdio> 
@@ -18,5 +21,5 @@ class menu
 		void gameConfig(string * options);
 		string * options;
 		const int size;
-
 };
+#endif

@@ -1,3 +1,6 @@
+#Define the amount of energy lost per move
+player energy =>
+
 #Max map size is 30
 map size => 20
 
@@ -12,4 +15,3 @@ player bank =>
 
 #Multiple items in obstacles category are separated by a comma. Example: rock, water, tree
 obstacles =>
-
