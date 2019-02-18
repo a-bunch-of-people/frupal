@@ -8,14 +8,6 @@
 using namespace std;
 using namespace frupal_utils;
 
-struct NULL_TEXTURE {
-  char* obj_type;
-
-  NULL_TEXTURE(const char*);
-  ~NULL_TEXTURE();
-  void what();
-};
-
 class TerrainTile {
   protected:
       // Stuff to define later

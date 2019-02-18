@@ -11,6 +11,15 @@ namespace frupal_utils {
   // Utility stuff
   //
 
+
+  struct NULL_TEXTURE {
+    char* obj_type;
+
+    NULL_TEXTURE(const char*);
+    ~NULL_TEXTURE();
+    void what();
+  };
+
   struct TextureMap{
     char** tile_types;
     char* textures;

@@ -7,6 +7,23 @@
 namespace frupal_utils {
   using namespace std;
 
+  //
+  // Error Typdefs
+  //
+
+  NULL_TEXTURE::NULL_TEXTURE(const char* obj_type) {
+    this->obj_type = new char[strlen(obj_type) + 1];
+    strcpy(this->obj_type, obj_type);
+  }
+
+  NULL_TEXTURE::~NULL_TEXTURE() {
+    delete [] obj_type;
+  }
+
+  void NULL_TEXTURE::what() {
+    cerr << "[ERROR]: No textures were found for the " << obj_type << " object!" << endl;
+  }
+
   TextureMap::TextureMap() : size(0) {}
 
   TextureMap::~TextureMap() {
