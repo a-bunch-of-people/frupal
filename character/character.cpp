@@ -10,9 +10,9 @@ Position::Position(const int x, const int y): x(x), y(y) {}
 // Character Implementation
 //
 
-Character::Character(): position(1,1), name(NULL), gold(0), energy(0) {}
+Character::Character(): position(1,1), name(NULL), key_texture(NULL), gold(0), energy(0) {}
 
-Character::Character(const int x, const int y, const char * start_name, const int gold, const int energy): position(x,y), gold(gold), energy(energy) {
+Character::Character(const int x, const int y, const char * start_name, const TextureMap &textures, const int gold, const int energy): position(x,y), gold(gold), energy(energy) {
   if(name)
     delete [] name;
 
@@ -24,6 +24,8 @@ Character::Character(const int x, const int y, const char * start_name, const in
 Character::~Character() {
     if(name)
         delete [] name;
+    if(key_texture)
+      delete [] key_texture;
 }
 
 void Character::display() {

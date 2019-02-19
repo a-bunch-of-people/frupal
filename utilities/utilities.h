@@ -30,7 +30,6 @@ namespace frupal_utils {
     void display();
   };
 
-  void load_textures(TextureMap&);
   void load_textures(TextureMap&, const char*);
   const int MAX_STREAM_SIZE = 64;
   const bool DEBUG = false;

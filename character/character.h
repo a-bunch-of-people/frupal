@@ -20,15 +20,15 @@ struct Position {
 class Character {
   protected:             // lower left = (1,1)Character
       Position position;    // struct with int x, y
-                         // returned by getpos()
-      char * name;       // Character's name
-      int gold;          // Character's $$
-      int energy;        // energy is used for moves
+                            // returned by getpos()
+      char * name;          // Character's name
+      char * key_texture;   // Character's textures
+      int gold;             // Character's $$
+      int energy;           // Character's energy for moving
 
     public:
         Character();       // default constructor
-        Character(const int start_x, const int start_y, const char * start_name,
-                 const int start_gold, const int start_energy);
+        Character(const int start_x, const int start_y, const char * start_name, const TextureMap &textures, const int start_gold, const int start_energy);
         ~Character();
 
         void display();

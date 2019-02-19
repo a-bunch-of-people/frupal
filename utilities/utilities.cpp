@@ -43,10 +43,6 @@ namespace frupal_utils {
     }
   }
 
-  void load_textures(TextureMap &textures) {
-    load_textures(textures, "textures/terrain.texture");
-  }
-
   void load_textures(TextureMap &textures, const char* filename) {
     int i = 0;
     char** tile_types = new char*[MAX_STREAM_SIZE];
