@@ -15,7 +15,7 @@ int main(const int argc, const char* argv[]) {
 
   CHARACTER_TEXTURES.display();
   TERRAIN_TEXTURES.display();
-  Character player(1, 1, "Bob Kerman", CHARACTER_TEXTURES, 99, 100);
+  Character player(1, 1, "Bob Kerman", CHARACTER_TEXTURES, 69, 100);
   // Water t1(TERRAIN_TEXTURES);
   // Plains t2(TERRAIN_TEXTURES);
 

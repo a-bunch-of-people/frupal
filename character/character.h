@@ -8,6 +8,10 @@
 using namespace std;
 using namespace frupal_utils;
 
+struct Event {
+  const int type;
+}
+
 struct Position {
     int x;
     int y;
@@ -22,19 +26,17 @@ class Character {
       Position position;    // struct with int x, y
                             // returned by getpos()
       char * name;          // Character's name
-      char * key_texture;   // Character's textures
       int gold;             // Character's $$
       int energy;           // Character's energy for moving
 
     public:
         Character();       // default constructor
-        Character(const int start_x, const int start_y, const char * start_name, const TextureMap &textures, const int start_gold, const int start_energy);
+        Character(const int start_x, const int start_y, const char * start_name, const int start_gold, const int start_energy);
         ~Character();
 
         void display();
-        void display_map();
 
-        const Position * getpos();
+        const Position * get_position();
         const bool check_bounds();
         const int move(/* string lib */);  // Up/Down, Left/Right
 };

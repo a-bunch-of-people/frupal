@@ -10,9 +10,9 @@ Position::Position(const int x, const int y): x(x), y(y) {}
 // Character Implementation
 //
 
-Character::Character(): position(1,1), name(NULL), key_texture(NULL), gold(0), energy(0) {}
+Character::Character(): position(1,1), name(NULL), gold(0), energy(0) {}
 
-Character::Character(const int x, const int y, const char * start_name, const TextureMap &textures, const int gold, const int energy): position(x,y), gold(gold), energy(energy) {
+Character::Character(const int x, const int y, const char * start_name, const int gold, const int energy): position(x,y), gold(gold), energy(energy) {
   if(name)
     delete [] name;
 
@@ -24,8 +24,6 @@ Character::Character(const int x, const int y, const char * start_name, const Te
 Character::~Character() {
     if(name)
         delete [] name;
-    if(key_texture)
-      delete [] key_texture;
 }
 
 void Character::display() {
@@ -35,12 +33,7 @@ void Character::display() {
     cout << "Current energy: " << energy << endl << endl;
 }
 
-void display_map()
-{
-    cout << "Displaying map..." << endl;
-}
-
-const Position * Character::getpos() {
+const Position * Character::get_position() {
   return &position;
 }
 
@@ -49,7 +42,7 @@ const bool Character::check_bounds()
     return false;
 }
 
-const int Character::move(/* string */)
+const int Character::move(Event event)
 {
     return 0;
 }
