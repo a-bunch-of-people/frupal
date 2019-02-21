@@ -1,5 +1,5 @@
 CC=g++
-FLAGS=-g3 -Wall -std=c++11
+FLAGS=-g3 -Wall -std=c++11 -lncurses
 
 HEAD=*.h terrain/*.h utilities/*.h
 SRC=*.cpp character/player/*.cpp character/*.cpp terrain/*.cpp utilities/*.cpp

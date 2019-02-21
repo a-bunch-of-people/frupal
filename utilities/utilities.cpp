@@ -107,4 +107,8 @@ namespace frupal_utils {
     delete [] type;
     delete [] texture;
   }
+
+  void sleep(const int sleep_time) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
+  }
 }

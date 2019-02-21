@@ -8,10 +8,11 @@
 // Standard Libraries
 #include <iostream>
 #include <stdlib.h>
-#include <time.h>
-#include <math.h>
+#include <ncurses.h>
+#include <unistd.h>
 
 // Local Libraries
+#include "pch.h"
 #include "terrain/terrain.h"
 #include "utilities/utilities.h"
 #include "character/character.h"

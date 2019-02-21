@@ -42,7 +42,6 @@ const bool Character::check_bounds()
     return false;
 }
 
-const int Character::move(Event event)
-{
+const int Character::move(Event event) {
     return 0;
 }

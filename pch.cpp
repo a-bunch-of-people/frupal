@@ -115,7 +115,7 @@ char Board::fillExternals(int rndInput) {
 //initially shows all _ as they haven't been anywhere yet
 void Board::showBoard()
 {
-	std::cout << "\n\nfyi, showBoard() function\n\n";
+	// std::cout << "\n\nfyi, showBoard() function\n\n";
 	for (int i = 0; i < userInput; ++i) {
 		for (int j = 0; j < userInput; ++j)
 			std::cout <<" " << gameSpace[i][j].unknownBlank << " " ;
@@ -124,7 +124,7 @@ void Board::showBoard()
 }
 
 void Board::showTerrain() {
-	std::cout << "\n\nfyi, showTerrain() function \n\n"; // just fyi to developers. will remove when program is running
+	// std::cout << "\n\nfyi, showTerrain() function \n\n"; // just fyi to developers. will remove when program is running
 	for (int i = 0; i < userInput; ++i) {
 		for (int j = 0; j < userInput; ++j) {
 			std::cout << " " << gameSpace[i][j].terrain << " ";
@@ -136,7 +136,7 @@ void Board::showTerrain() {
 
 void Board::showALL()
 {
-	std::cout << "\n\n fyi, showAll function() \n\n"; // just fyi to developers.
+	// std::cout << "\n\ns fyi, showAll function() \n\n"; // just fyi to developers.
 	for (int i = 0; i < userInput; ++i) {
 		for (int j = 0; j < userInput; ++j) {
 			std::cout << " " << gameSpace[i][j].terrain;

@@ -10,7 +10,7 @@ using namespace frupal_utils;
 
 struct Event {
   const int type;
-}
+};
 
 struct Position {
     int x;
@@ -38,7 +38,7 @@ class Character {
 
         const Position * get_position();
         const bool check_bounds();
-        const int move(/* string lib */);  // Up/Down, Left/Right
+        const int move(Event);  // Up/Down, Left/Right
 };
 
 class merchant: public Character

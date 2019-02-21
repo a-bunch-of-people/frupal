@@ -5,6 +5,8 @@
 #include <string.h>
 #include <istream>
 #include <fstream>
+#include <chrono>
+#include <thread>
 
 namespace frupal_utils {
   //
@@ -31,7 +33,10 @@ namespace frupal_utils {
   };
 
   void load_textures(TextureMap&, const char*);
+  void sleep(const int);
+
   const int MAX_STREAM_SIZE = 64;
+  const int THREAD_HALT_TIME = 15; // Time in miliseconds
   const bool DEBUG = false;
 }
 
