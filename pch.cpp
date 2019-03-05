@@ -7,7 +7,7 @@
 Board::Board() {}
 
 // constructor with parameter
-Board::Board(int matrixSize) : userInput(matrixSize) {
+Board::Board(int matrixSize) : gridSize(matrixSize) {
 	gameSpace = new boardSpace*[matrixSize]; //rows
 	for (int i = 0; i < matrixSize; ++i)
 		gameSpace[i] = new boardSpace[matrixSize]; // columns
@@ -23,9 +23,9 @@ Board::~Board() {
 //filled board gets set with random inputs
 //called within constructor
 void Board::setBoard(){
-	for (int i = 0; i < userInput; ++i) {
-		for (int j = 0; j < userInput; ++j) {
-			gameSpace[i][j].blankSpace = '_';
+	for (int i = 0; i < gridSize; ++i) {
+		for (int j = 0; j < gridSize; ++j) {
+			gameSpace[i][j].unknownBlank = '_';
 			gameSpace[i][j].terrain = fillSpaces(randomOutput());
 			gameSpace[i][j].visited = 0;
 		}
@@ -70,8 +70,8 @@ char Board::fillSpaces(int rndInput) {
 void Board::showBoard()
 {
 	std::cout << "\n\nfyi, showBoard() function\n\n";
-	for (int i = 0; i < userInput; ++i) {
-		for (int j = 0; j < userInput; ++j)
+	for (int i = 0; i < gridSize; ++i) {
+		for (int j = 0; j < gridSize; ++j)
 			std::cout <<" " << gameSpace[i][j].blankSpace << " " ;
 		std::cout << std::endl;
 	}
@@ -79,8 +79,8 @@ void Board::showBoard()
 
 void Board::showTerrain() {
 	std::cout << "\n\nfyi, showTerrain() function \n\n"; // just fyi to developers. will remove when program is running
-	for (int i = 0; i < userInput; ++i) {
-		for (int j = 0; j < userInput; ++j) {
+	for (int i = 0; i < gridSize; ++i) {
+		for (int j = 0; j < gridSize; ++j) {
 			std::cout << " " << gameSpace[i][j].terrain << " ";
 		}
 		std::cout << std::endl;
@@ -91,8 +91,8 @@ void Board::showTerrain() {
 void Board::showALL()
 {
 	//std::cout << "\n\n fyi, showAll function() \n\n"; // just fyi to developers.
-	for (int i = 0; i < userInput; ++i) {
-		for (int j = 0; j < userInput; ++j) {
+	for (int i = 0; i < gridSize; ++i) {
+		for (int j = 0; j < gridSize; ++j) {
 			std::cout << " " << gameSpace[i][j].terrain;
 		}
 		std::cout << std::endl;
@@ -101,17 +101,17 @@ void Board::showALL()
 void Board::showVisited()
 {
 	//std::cout << "\n\n fyi, showMask function() \n\n"; // just fyi to developers.
-	for (int i = 0; i < userInput; ++i) {
-		for (int j = 0; j < userInput; ++j) {
+	for (int i = 0; i < gridSize; ++i) {
+		for (int j = 0; j < gridSize; ++j) {
 			std::cout << " " << gameSpace[i][j].visited << " ";
 		}
 		std::cout << std::endl;
 	}
 }
 
-// wrapper function to pass userInput to derived class
+// wrapper function to pass gridSize to derived class
 int Board::userValue() {
-	return userInput - 1;
+	return gridSize - 1;
 }
 
 
@@ -121,30 +121,34 @@ BoardUpdate::BoardUpdate(posXY &position, const Board & board)
 	: Board(board), pos(position) {}
 
 // movment functions
-void  BoardUpdate::left() {
+Board::posXY &BoardUpdate::left(posXY &position) {
 	//takes xy coordinate and updates location in the up direction
 	if (pos.y > 0)  pos.y--; //top of grid. no op.
 	location();
+	return pos;
 }
 
-void BoardUpdate::right() {
+Board::posXY &BoardUpdate::right(posXY &position) {
 	//takes xy coordinate and updates location in the down direction
 	int max = userValue();
 	if (pos.y != max) pos.y++; // bottom of grid. no op.
 	location();
+	return pos;
 }
 
-void BoardUpdate::up() {
+Board::posXY &BoardUpdate::up(posXY &position) {
 	//takes xy coordinate and updates location in the left direction
 	if (pos.x != 0) pos.x--; // left side of grid, no op
 	location();
+	return pos;
 }
 
-void BoardUpdate::down() {
+Board::posXY &BoardUpdate::down(posXY &position) {
 	//takes xy coordinate and updates location in the right direction
 	int max = userValue();
 	if (pos.x != max) pos.x++; // right side of grid. no op. 
 	location();
+	return pos;
 }
 
 void BoardUpdate::location() {
@@ -154,7 +158,7 @@ void BoardUpdate::location() {
 
 void BoardUpdate::updateLocation() {
 	visited();
-	showMask();
+	showVisited();
 
 }
 
@@ -164,5 +168,5 @@ void BoardUpdate::visited() {
 		<< "  location pos.y : " << pos.y << std::endl;
 
 	gameSpace[pos.x][pos.y].visited = 1;
-	gameSpace[pos.x][pos.y].blankSpa = gameSpace[pos.x][pos.y].terrain;
+	gameSpace[pos.x][pos.y].unknownBlank = gameSpace[pos.x][pos.y].terrain;
 

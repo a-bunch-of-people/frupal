@@ -21,21 +21,23 @@ public:
 	void showVisited();
 	int userValue();
 	~Board();
-
+	
 private:
 	void setBoard();		// randomly sets up board.
 	int randomOutput();		// generates a random number
 	char fillSpaces(int rndInput);	// fills the matrix with terrain
 
+	
 protected:
-	struct posXY { //position
-		int x;
-		int y;
-	};
-	struct boardSpace {
+		struct boardSpace {
 		TerrainTile *terrain;
 		char unknownBlank;
 		int visited;
+	};
+
+struct posXY { //position
+		int x;
+		int y;
 	};
 
 	boardSpace** gameSpace;  // struct that has 3 qualities.
@@ -53,10 +55,10 @@ class BoardUpdate : public Board {
 public:
 	BoardUpdate(posXY &position, int matrixSize);
 	BoardUpdate(posXY &position, const Board & board);
-	void up();		// this will take and pass a struct w/ xy coords
-	void down();		// same
-	void left();		// same
-	void right();		// same
+	posXY &up(posXY &position);		// this will take and pass a struct w/ xy coords
+	posXY &down(posXY &position);		// same
+	posXY &left(posXY &position);		// same
+	posXY &right(posXY &position);		// same
 	void location();
 	void updateLocation();
 	void visited();		// updates tile from unseen 0 to seen 1
