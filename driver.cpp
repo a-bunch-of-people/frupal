@@ -6,48 +6,76 @@
   program: F5 or Debug > Start Debugging menu
 */
 
+void drawBorder();
+
+void drawBorder() {
+    clear();
+    box(stdscr, '*', '*');
+}
+
+const int size(const char* s1, const char* s2) {
+  return (strlen(s1) + strlen(s2));
+}
+
 int main(const int argc, const char* argv[]) {
-  const int NUM = 1200;
-  const int LENGTH = sqrt(NUM) * (10 / 4);
+  // Game Init stuff
+  bool  running = true;
 
-  TextureMap TEXTURES;
-  TerrainTile * tiles[NUM];
-  load_textures(TEXTURES);
+  TextureMap CHARACTER_TEXTURES;
+  TextureMap TERRAIN_TEXTURES;
 
-  try{
-    for(int i = 0; i < NUM; ++i) {
-      int rand_num = rand() % TEXTURES.size;
+  load_textures(CHARACTER_TEXTURES, "textures/character.texture");
+  load_textures(TERRAIN_TEXTURES, "textures/terrain.texture");
 
-      switch (rand_num) {
-        case 0:
-          tiles[i] = new Water(TEXTURES);
-          break;
-        case 1:
-          tiles[i] = new Plains(TEXTURES);
-          break;
-        default:
-          tiles[i] = new Plains(TEXTURES);
-      }
-    }
+  cout << "Loading texture files in order:" << endl;
+  CHARACTER_TEXTURES.display();
+  TERRAIN_TEXTURES.display();
+  Board board(30);
+  Character player(1, 1, "Bob Kerman", 69, 100);
+  // Water t1(TERRAIN_TEXTURES);
+  // Plains t2(TERRAIN_TEXTURES);
 
-    for(int i = 0; i < NUM; ++i) {
-      cout << tiles[i]->texture();
+  // Screen init stuff
+  cout << "Initializing screen..." << endl;
+  initscr();
+  cbreak();
+  noecho();
+  curs_set(FALSE);
+  nodelay(stdscr,TRUE);
+  keypad(stdscr,TRUE);
 
-      if((i % LENGTH) == 0)
-        cout << endl;
-    }
+  char* msg = new char[MAX_STREAM_SIZE];
+  cout << "Enter something: ";
+  cin >> msg;
+
+  const int msg_len = strlen(msg);
+  int width = 0;
+  int height = 0;
+  int x = 10;
+  int x_dir = 1;
+  int y = 10;
+  int y_dir = 1;
+
+  cout << "Entering main loop!" << endl;
+  while(running) {
+    getmaxyx(stdscr, height, width);
+    if(x >= (width - msg_len) || x < 0)
+      x_dir *= -1;
+    if(y >= height || y < 0)
+      y_dir *= -1;
+
+    x += x_dir;
+    y += y_dir;
+
+    clear();
+    mvprintw(y, x, msg);
+    // drawBorder();
+    // board.showBoard();
+    refresh();
+    sleep(THREAD_HALT_TIME);
   }
-  catch(NULL_TEXTURE e){
-    e.what();
-  }
 
-  //
-  // Destruction Phase
-  //
-
-  for(int i = 0; i < NUM - 1; ++i)
-    if(tiles[i])
-      delete tiles[i];
+  endwin();
 
   return 0;
 }

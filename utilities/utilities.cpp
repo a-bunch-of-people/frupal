@@ -7,6 +7,23 @@
 namespace frupal_utils {
   using namespace std;
 
+  //
+  // Error Typdefs
+  //
+
+  NULL_TEXTURE::NULL_TEXTURE(const char* obj_type) {
+    this->obj_type = new char[strlen(obj_type) + 1];
+    strcpy(this->obj_type, obj_type);
+  }
+
+  NULL_TEXTURE::~NULL_TEXTURE() {
+    delete [] obj_type;
+  }
+
+  void NULL_TEXTURE::what() {
+    cerr << "[ERROR]: No textures were found for the " << obj_type << " object!" << endl;
+  }
+
   TextureMap::TextureMap() : size(0) {}
 
   TextureMap::~TextureMap() {
@@ -24,10 +41,6 @@ namespace frupal_utils {
       if(tile_types[i] && tile_types[i][0] != '\0')
         cout << "TILE: \"" << tile_types[i] << "\" TEXTURE: \'" << textures[i] << "\'" << endl;
     }
-  }
-
-  void load_textures(TextureMap &textures) {
-    load_textures(textures, "textures/terrain.texture");
   }
 
   void load_textures(TextureMap &textures, const char* filename) {
@@ -93,5 +106,9 @@ namespace frupal_utils {
     delete [] temp_textures;
     delete [] type;
     delete [] texture;
+  }
+
+  void sleep(const int sleep_time) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
   }
 }
