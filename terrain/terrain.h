@@ -24,7 +24,7 @@ class TerrainTile {
       virtual const int get_move_energy() = 0;
 
       // General function stuff
-      char texture();
+      const char texture();
 };
 
 class PassableTile: public TerrainTile {
@@ -52,6 +52,26 @@ class Water: public UnpassableTile {
     // Constructors/Destructors
     Water(const TextureMap&);
     ~Water();
+
+    // General function stuff
+    const int get_move_energy();
+};
+
+class Rocks: public UnpassableTile {
+  public:
+    // Constructors/Destructors
+    Rocks(const TextureMap&);
+    ~Rocks();
+
+    // General function stuff
+    const int get_move_energy();
+};
+
+class Tree: public UnpassableTile {
+  public:
+    // Constructors/Destructors
+    Tree(const TextureMap&);
+    ~Tree();
 
     // General function stuff
     const int get_move_energy();

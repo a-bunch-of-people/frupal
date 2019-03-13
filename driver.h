@@ -15,7 +15,6 @@
 #include "pch.h"
 #include "terrain/terrain.h"
 #include "utilities/utilities.h"
-#include "character/character.h"
 #include "character/player/player.h"
 
 using namespace std;

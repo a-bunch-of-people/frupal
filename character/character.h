@@ -3,10 +3,14 @@
 
 #include <iostream>
 #include <cstring>
+#include <ncurses.h>
+#include <unistd.h>
 #include "../utilities/utilities.h"
 
 using namespace std;
 using namespace frupal_utils;
+
+const char* concatenate(const char**);
 
 struct Event {
   const int type;
@@ -28,6 +32,7 @@ class Character {
       char * name;          // Character's name
       int gold;             // Character's $$
       int energy;           // Character's energy for moving
+      char key_texture;
 
     public:
         Character();       // default constructor
@@ -38,7 +43,8 @@ class Character {
 
         const Position * get_position();
         const bool check_bounds();
-        const int move(Event);  // Up/Down, Left/Right
+        void move(const int, const int);  // Up/Down, Left/Right
+
 };
 
 class merchant: public Character

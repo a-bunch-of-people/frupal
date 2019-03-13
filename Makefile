@@ -2,7 +2,7 @@ CC=g++
 FLAGS=-lcurses -g3 -Wall -std=c++11
 
 HEAD=driver.h pch.h
-SRC=driver.cpp pch.cpp utilities/*.cpp
+SRC=*.cpp character/*.cpp character/player/*.cpp terrain/*.cpp utilities/*.cpp
 TESTS=tests/*.cpp terrain/*.cpp utilities/*.cpp
 
 TEST_EXE=tests/ALL_TESTS

@@ -6,50 +6,54 @@
 #include <iostream>
 #include <time.h>
 #include <random>
-#include "terrain.h"
+#include <ncurses.h>
+#include <unistd.h>
+#include "terrain/terrain.h"
+#include "utilities/utilities.h"
 
 using namespace std;
 
 
 class Board {
-public:
-	Board();
-	Board(int gridSize);	//constructor
-	void showBoard();	// user can display board from main
-	void showTerrain();	// user can display all the board
-	void showALL();		// can give up and see everything
-	void showVisited();
-	int userValue();
-	~Board();
-	
-private:
-	void setBoard();		// randomly sets up board.
-	int randomOutput();		// generates a random number
-	char fillSpaces(int rndInput);	// fills the matrix with terrain
+	public:
+		Board();
+		Board(const int);	//constructor
+		void showBoard();	// user can display board from main
+		void showTerrain();	// user can display all the board
+		void showALL();		// can give up and see everything
+		void showVisited();
+		int userValue();
+		~Board();
 
-	
-protected:
+	private:
+		void setBoard();		// randomly sets up board.
+		int randomOutput();		// generates a random number
+		TerrainTile* fillSpaces(int rndInput);	// fills the matrix with terrain
+
+
+	protected:
 		struct boardSpace {
-		TerrainTile *terrain;
-		char unknownBlank;
-		int visited;
-	};
+			boardSpace();
+			~boardSpace();
+			TerrainTile* terrain;
+			char unknownBlank;
+			int visited;
+		};
 
-struct posXY { //position
-		int x;
-		int y;
-	};
+		struct posXY { //position
+			int x;
+			int y;
+		};
 
-	boardSpace** gameSpace;  // struct that has 3 qualities.
-				 // blank tile for user to uncover
-				 // tile with terrain
-				 // and a tracker to keep track of which tile has been seen
-	int gridSize;		 // variable for user input on matrix size
-
+		boardSpace ** gameSpace;  // struct that has 3 qualities.
+		// blank tile for user to uncover
+		// tile with terrain
+		// and a tracker to keep track of which tile has been seen
+		int gridSize;		 // variable for user input on matrix size
 };
 
 // Hey, Dmitri, all the void functions below will be updated as posXY functions
-// to pass the updated locations to the player entity when called. 
+// to pass the updated locations to the player entity when called.
 // I'll do that by Friday. (possibly Thursday night).
 class BoardUpdate : public Board {
 public:

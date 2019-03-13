@@ -6,9 +6,23 @@
 #define FRUPAL_PLAYER_H
 
 #include "../character.h"
+#include "../../utilities/utilities.h"
 
 class Player: public Character {
+  public:
+    Player(const TextureMap&, const int, const int, const char*, const int, const int);
+    ~Player();
+    void left();
+    void down();
+    void right();
+    void up();
 
+  protected:
+    int texture_found;
+    char texture_left;
+    char texture_down;
+    char texture_right;
+    char texture_up;
 };
 
 #endif
