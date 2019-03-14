@@ -49,7 +49,7 @@ const bool Character::check_bounds()
     return false;
 }
 
-void Character::move(const int x, const int y) {
-  position.x = x;
-  position.y = y;
+void Character::move(const Position new_pos, const Position top_left, const Position lower_right) {
+  if(new_pos.x >= top_left.x && new_pos.x < lower_right.x){ position.x = new_pos.x; }
+  if(new_pos.y >= top_left.y && new_pos.y < lower_right.y){ position.y = new_pos.y; }
 }

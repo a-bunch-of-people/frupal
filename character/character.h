@@ -6,6 +6,7 @@
 #include <ncurses.h>
 #include <unistd.h>
 #include "../utilities/utilities.h"
+#include "../pch.h"
 
 using namespace std;
 using namespace frupal_utils;
@@ -43,7 +44,7 @@ class Character {
 
         const Position * get_position();
         const bool check_bounds();
-        void move(const int, const int);  // Up/Down, Left/Right
+        void move(const Position, const Position, const Position);  // Up/Down, Left/Right
 
 };
 

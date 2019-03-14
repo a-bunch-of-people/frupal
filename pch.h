@@ -18,10 +18,19 @@ class Board {
 	public:
 		Board();
 		Board(const int);	//constructor
+
 		void showBoard();	// user can display board from main
 		void showTerrain();	// user can display all the board
 		void showALL();		// can give up and see everything
 		void showVisited();
+
+		void showBoard(const int x, const int y);	// user can display board from main
+		void showTerrain(const int x, const int y);	// user can display all the board
+		void showALL(const int x, const int y);		// can give up and see everything
+		void showVisited(const int x, const int y);
+
+
+		const bool isPassable(const int, const int);
 		int userValue();
 		~Board();
 

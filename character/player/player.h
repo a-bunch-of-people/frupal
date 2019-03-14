@@ -12,10 +12,10 @@ class Player: public Character {
   public:
     Player(const TextureMap&, const int, const int, const char*, const int, const int);
     ~Player();
-    void left();
-    void down();
-    void right();
-    void up();
+    void left(Board &);
+    void down(Board &);
+    void right(Board &);
+    void up(Board &);
 
   protected:
     int texture_found;

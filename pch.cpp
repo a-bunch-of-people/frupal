@@ -73,32 +73,41 @@ TerrainTile*  Board::fillSpaces(int rndInput) {
 
 //shows player where he has been
 //initially shows all _ as they haven't been anywhere yet
-void Board::showBoard()
+void Board::showBoard() { showBoard(0, 0); }
+void Board::showBoard(const int x, const int y)
 {
-	for (int i = 0; i < gridSize; ++i)
-		for (int j = 0; j < gridSize; ++j)
+	for (int i = x; i < gridSize; ++i)
+		for (int j = y; j < gridSize; ++j)
 			mvprintw(j, i, "" + gameSpace[i][j].unknownBlank);
 }
 
-void Board::showTerrain() {
-	for (int i = 0; i < gridSize; ++i)
-		for (int j = 0; j < gridSize; ++j)
+void Board::showTerrain() { showTerrain(0, 0); }
+void Board::showTerrain(const int x, const int y) {
+	for (int i = x; i < gridSize; ++i)
+		for (int j = y; j < gridSize; ++j)
+			if(gameSpace[i][j].visited == 1)
+				mvprintw(j, i, "" + gameSpace[i][j].terrain->texture());
+			else
+				mvprintw(j, i, "_");// + gameSpace[i][j].unknownBlank);
+}
+
+void Board::showALL() { showALL(0, 0); }
+void Board::showALL(const int x, const int y)
+{
+	for (int i = x; i < gridSize; ++i)
+		for (int j = y; j < gridSize; ++j)
 			mvprintw(j, i, "" + gameSpace[i][j].terrain->texture());
 }
 
-
-void Board::showALL()
+void Board::showVisited() { showVisited(0, 0); }
+void Board::showVisited(const int x, const int y)
 {
-	for (int i = 0; i < gridSize; ++i)
-		for (int j = 0; j < gridSize; ++j)
-			mvprintw(j, i, "" + gameSpace[i][j].terrain->texture());
-}
-void Board::showVisited()
-{
-	for (int i = 0; i < gridSize; ++i)
-		for (int j = 0; j < gridSize; ++j)
+	for (int i = x; i < gridSize; ++i)
+		for (int j = y; j < gridSize; ++j)
 			mvprintw(j, i, "" + gameSpace[i][j].visited);
 }
+
+const bool Board::isPassable(const int x, const int y) { return gameSpace[x][y].terrain->is_passable(); }
 
 // wrapper function to pass gridSize to derived class
 int Board::userValue() {

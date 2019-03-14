@@ -23,7 +23,6 @@ int main(const int argc, const char* argv[]) {
   Board board(50);
 
   TextureMap CHARACTER_TEXTURES;
-  TextureMap TERRAIN_TEXTURES;
 
   load_textures(CHARACTER_TEXTURES, "textures/character.texture");
 
@@ -49,7 +48,7 @@ int main(const int argc, const char* argv[]) {
     clear();
 
     drawBorder();
-    // board.showTerrain();
+    board.showTerrain(1, 1);
     player.display();
 
     refresh();
@@ -60,10 +59,10 @@ int main(const int argc, const char* argv[]) {
     char key;
     cin >> key;
     switch(key){
-      case 'a': player.left(); break;
-      case 's': player.down(); break;
-      case 'd': player.right(); break;
-      case 'w': player.up(); break;
+      case 'a': player.left(board); break;
+      case 's': player.down(board); break;
+      case 'd': player.right(board); break;
+      case 'w': player.up(board); break;
     }
 
     sleep(THREAD_HALT_TIME);

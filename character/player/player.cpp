@@ -32,7 +32,34 @@ Player::Player(const TextureMap& textures, const int x, const int y, const char*
 
 Player::~Player() {}
 
-void Player::left() { key_texture = texture_left; move(position.x - 1, position.y); }
-void Player::down() { key_texture = texture_down; move(position.x, position.y + 1); }
-void Player::right() { key_texture = texture_right; move(position.x + 1, position.y); }
-void Player::up() { key_texture = texture_up; move(position.x, position.y - 1); }
+void Player::left(Board & board) {
+  Position new_pos(position.x - 1, position.y);
+  key_texture = texture_left;
+
+  if(board.isPassable(new_pos.x, new_pos.y))
+    move(new_pos, Position(1, 1), Position(50, 50));
+}
+
+void Player::down(Board & board) {
+  Position new_pos(position.x, position.y + 1);
+  key_texture = texture_down;
+
+  if(board.isPassable(new_pos.x, new_pos.y))
+    move(new_pos, Position(1, 1), Position(50, 50));
+}
+
+void Player::right(Board & board) {
+  Position new_pos(position.x + 1, position.y);
+  key_texture = texture_right;
+
+  if(board.isPassable(new_pos.x, new_pos.y))
+    move(new_pos, Position(1, 1), Position(50, 50));
+}
+
+void Player::up(Board & board) {
+  Position new_pos(position.x, position.y - 1);
+  key_texture = texture_up;
+
+  if(board.isPassable(new_pos.x, new_pos.y))
+    move(new_pos, Position(1, 1), Position(50, 50));
+}
