@@ -1,41 +1,38 @@
-CC=g++
-FLAGS=-g3 -Wall -std=c++11
+CC = g++
+FLAGS = -lcurses -g3 -Wall -std=c++11
 
-HEAD=driver.h pch.h
-SRC=driver.cpp pch.cpp utilities/*.cpp
-TESTS=tests/*.cpp terrain/*.cpp utilities/*.cpp
+HEAD = $(filter-out tests/*.h, $(wildcard *.h)  $(wildcard */*.h))
+SRC = $(filter-out tests/terrain_tests.cpp, $(wildcard *.cpp)  $(wildcard */*.cpp))
 
-TEST_EXE=tests/ALL_TESTS
-EXE=frupal
+TEST_HEAD = $(filter-out driver.h, $(wildcard *.h)  $(wildcard */*.h))
+TEST_SRC = $(filter-out driver.cpp, $(wildcard *.cpp)  $(wildcard */*.cpp))
+
+EXE = frupal
+TEST_EXE = tests/ALL_TESTS
 
 VAL=valgrind
 VFLAGS=--leak-check=full
 
+a: all
 all: $(HEAD)
 	$(CC) $(FLAGS) $(SRC) -o $(EXE)
 
-execute:	all
-	./$(EXE)
-
-e:	execute
-
-terrain: driver.h terrain/terrain.h
-	$(CC) $(FLAGS) driver.cpp utilities/utilities.cpp terrain/terrain.cpp -o $(EXE)
-
-test:
-	$(CC) $(FLAGS) $(TESTS) -o $(TEST_EXE)
-
-flagless:
-	$(CC) $(SRC) -o $(EXE)
-
-f: flagless
-
-valgrind:	$(EXE)
-	$(VAL) $(VFLAGS) ./$(EXE)
-
-v:	valgrind
-
+c: clean
 clean:
 	rm -rf $(EXE) $(TEST_EXE) *.o
 
-c:	clean
+e:	execute
+execute: all
+	./$(EXE)
+
+f: flagless
+flagless:
+	$(CC) $(SRC) -o $(EXE)
+
+t: test
+test:	$(TEST_HEAD)
+	$(CC) $(FLAGS) $(TEST_SRC) -o $(TEST_EXE)
+
+v:	valgrind
+valgrind:	$(EXE)
+	$(VAL) $(VFLAGS) ./$(EXE)

@@ -1,30 +1,52 @@
-#ifndef FRUPAL_UTILS
-#define FRUPAL_UTILS
+#ifndef FRUPAL_UTILS_H
+#define FRUPAL_UTILS_H
 
 #include <iostream>
 #include <string.h>
 #include <istream>
 #include <fstream>
+#include <chrono>
+#include <thread>
 
-namespace frupal_utils {
+namespace frupal_utils{
   //
   // Utility stuff
   //
 
-  struct TextureMap{
-    char** tile_types;
-    char* textures;
-    int size;
+  struct Position{
+    int x;
+    int y;
 
-    TextureMap();
-    ~TextureMap();
-    void display();
+    Position();
+    Position(const Position&);
+    Position(const int, const int);
+    Position operator + (const Position &);
+    Position operator - (const Position &);
+    friend std::ostream& operator << (std::ostream &, const Position &);
   };
 
-  void load_textures(TextureMap&);
-  void load_textures(TextureMap&, const char*);
+  struct NULL_TEXTURE{
+    char* obj_type;
+
+    NULL_TEXTURE(const char*);
+    ~NULL_TEXTURE();
+    void what();
+  };
+
+  struct TextureMap{
+    char** texture_name;
+    char* texture_list;
+    int size;
+
+    TextureMap(const char*);
+    ~TextureMap();
+    friend std::ostream& operator << (std::ostream &, const TextureMap &);
+  };
+
+  void sleep(const int);
+
   const int MAX_STREAM_SIZE = 64;
-  const bool DEBUG = false;
+  const int THREAD_HALT_TIME = 15; // Time in miliseconds
 }
 
 #endif

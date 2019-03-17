@@ -1,53 +1,57 @@
 #include "driver.h"
 
-/*
-  file: where main will live for now
-  program: Ctrl + F5 or Debug > Start Without Debugging menu
-  program: F5 or Debug > Start Debugging menu
-*/
+int main(const int argc, char** argv){
+  using namespace frupal_utils;
 
-int main(const int argc, const char* argv[]) {
-  const int NUM = 1200;
-  const int LENGTH = sqrt(NUM) * (10 / 4);
+  Player player(Position(10,10), 3, 100);
+  Board board(50);
+  char input;
 
-  TextureMap TEXTURES;
-  TerrainTile * tiles[NUM];
-  load_textures(TEXTURES);
+  // Screen init stuff
+  initscr();
+  cbreak();
+  noecho();
+  curs_set(FALSE);
+  nodelay(stdscr,TRUE);
+  keypad(stdscr,TRUE);
 
-  try{
-    for(int i = 0; i < NUM; ++i) {
-      int rand_num = rand() % TEXTURES.size;
+  int width = 0;
+  int height = 0;
 
-      switch (rand_num) {
-        case 0:
-          tiles[i] = new Water(TEXTURES);
-          break;
-        case 1:
-          tiles[i] = new Plains(TEXTURES);
-          break;
-        default:
-          tiles[i] = new Plains(TEXTURES);
-      }
+  while(true){
+    //
+    // Input controller
+    //
+    cin >> input;
+    switch (input) {
+      case 'a':
+        if(board.is_passable(player.get_position() - Position(1,0)))
+          player.hide_character();
+          player.left();
+        break;
+      case 's':
+        if(board.is_passable(player.get_position() + Position(0,1)))
+          player.hide_character();
+          player.down();
+        break;
+      case 'd':
+        if(board.is_passable(player.get_position() + Position(1,0)))
+          player.hide_character();
+          player.right();
+        break;
+      case 'w':
+        if(board.is_passable(player.get_position() - Position(0,1)))
+          player.hide_character();
+          player.up();
+        break;
+      default:
+        break;
     }
 
-    for(int i = 0; i < NUM; ++i) {
-      cout << tiles[i]->texture();
-
-      if((i % LENGTH) == 0)
-        cout << endl;
-    }
-  }
-  catch(NULL_TEXTURE e){
-    e.what();
+    player.show_character();
+    refresh();
+    sleep(1);
   }
 
-  //
-  // Destruction Phase
-  //
-
-  for(int i = 0; i < NUM - 1; ++i)
-    if(tiles[i])
-      delete tiles[i];
-
-  return 0;
+  endwin();
 }

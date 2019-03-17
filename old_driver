@@ -1,0 +1,44 @@
+#include "driver.h"
+
+int main(const int argc, const char* argv[]){
+  // Screen init stuff
+  cout << "Initializing screen..." << endl;
+  initscr();
+  cbreak();
+  noecho();
+  curs_set(FALSE);
+  nodelay(stdscr,TRUE);
+  keypad(stdscr,TRUE);
+
+  int width = 0;
+  int height = 0;
+
+  cout << "Entering main loop!" << endl;
+  while(running){
+    getmaxyx(stdscr, height, width);
+    clear();
+
+    drawBorder();
+    board.showTerrain(1, 1);
+    player.display();
+
+    refresh();
+
+
+    // Really ghetto movement
+
+    char key;
+    cin >> key;
+    switch(key){
+      case 'a': player.left(board); break;
+      case 's': player.down(board); break;
+      case 'd': player.right(board); break;
+      case 'w': player.up(board); break;
+    }
+
+    sleep(THREAD_HALT_TIME);
+  }
+  endwin();
+
+  return 0;
+}
