@@ -1,10 +1,6 @@
 #include "character.h"
 
 //
-//
-//
-
-//
 // Position implementation
 //
 

@@ -1,5 +1,5 @@
-#ifndef FRUPAL_UTILS
-#define FRUPAL_UTILS
+#ifndef FRUPAL_UTILS_H
+#define FRUPAL_UTILS_H
 
 #include <iostream>
 #include <string.h>
@@ -13,6 +13,14 @@ namespace frupal_utils {
   // Utility stuff
   //
 
+  struct position {
+    int x;
+    int y;
+    int z;
+
+    position();
+    position(const int, const int, const int);
+  };
 
   struct NULL_TEXTURE {
     char* obj_type;

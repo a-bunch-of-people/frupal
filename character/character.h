@@ -6,7 +6,7 @@
 #include <ncurses.h>
 #include <unistd.h>
 #include "../utilities/utilities.h"
-#include "../pch.h"
+#include "../board/board.h"
 
 using namespace std;
 using namespace frupal_utils;

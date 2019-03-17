@@ -1,14 +1,4 @@
-//Dev: Bradley Thompson
-
 #include "equipment.h"
-using namespace std;
-
-//This is the home of the code corresponding to the equipment
-//hierarchy.
-//Testing will just be self-contained in this folder, in main
-//(At the bottom of the file).
-
-
 
 /*Equipment -- Base class */
 
@@ -56,7 +46,7 @@ void equipment::get_name(char* new_name)
 {
   if (name)
     delete[] name; //the arg fillers can overwrite
-  
+
   name = new char[strlen(new_name)+1];
   strcpy(name, new_name);
 }
@@ -95,23 +85,4 @@ equipment& equipment::operator=(const equipment& copy)
   damage = copy.damage;
 
   return *this;
-}
-
-
-
-//TESTING
-/****************************************/
-int main()
-{
-  equipment test, copy_test;
-  
-  test.get_name("Zorg, Pinky Render");
-  test.get_durbl(50);
-  test.get_dmg(1000);
-
-  copy_test = test;
-
-  copy_test.report();
-
-  return 0;
 }
