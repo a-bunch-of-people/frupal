@@ -1,51 +1,33 @@
 #include "character.h"
 
 //
-// Position implementation
-//
-
-Position::Position(const int x, const int y): x(x), y(y) {}
-
-//
 // Character Implementation
 //
 
-Character::Character(): position(1,1), name(NULL), gold(0), energy(0), key_texture('X') {}
+Character::Character(): position(Position()), gold(0), energy(0), key_texture(texture_dictionary.texture_list[texture_dictionary.size - 1]){}
 
-Character::Character(const int x, const int y, const char * start_name, const int gold, const int energy): position(x,y), gold(gold), energy(energy), key_texture('X') {
-  // if(name)
-  //   delete [] name;
-  //
-  // name = new char[strlen(start_name) + 1];
-  // strcpy(name, start_name);
-  // strcat(name, "\0");
+Character::Character(const Position& position, const int gold, const int energy): position(position), gold(gold), energy(energy), key_texture(texture_dictionary.texture_list[texture_dictionary.size - 1]){}
+
+TextureMap Character::texture_dictionary("textures/characters.texture");
+
+Character::~Character(){}
+
+void Character::show_character(){
+  mvaddch(position.y, position.x, key_texture);
 }
 
-Character::~Character() {
-    if(name)
-        delete [] name;
+void Character::hide_character(){
+  mvdelch(position.y, position.x);
 }
 
-void Character::display() {
-    mvprintw(position.y, position.x, "X");
-    // mvprintw(51,1, concatenate({"Name: ", name}));
-    // mvprintw(51,2, concatenate({"Location: (", position.x, ", ", position.y, ")"}));
-    // mvprintw(51,3, concatenate({"Gold: ", gold}));
-    // mvprintw(51,4, concatenate({"Current energy: ", energy}));
+Position& Character::get_position(){ return position; }
 
-    // delete [] var;
-}
-
-const Position * Character::get_position() {
-  return &position;
-}
-
-const bool Character::check_bounds()
-{
-    return false;
-}
-
-void Character::move(const Position new_pos, const Position top_left, const Position lower_right) {
+void Character::move(const Position new_pos, const Position top_left, const Position lower_right){
   if(new_pos.x >= top_left.x && new_pos.x < lower_right.x){ position.x = new_pos.x; }
   if(new_pos.y >= top_left.y && new_pos.y < lower_right.y){ position.y = new_pos.y; }
+}
+
+std::ostream& operator<< (ostream& buffer, const Character& source){
+  buffer << "{ position: " << source.position << ", gold: " << source.gold << ", engergy: " << source.energy << ", active texture: " << source.key_texture << ", textures: " << Character::texture_dictionary << " }";
+  return buffer;
 }

@@ -4,24 +4,31 @@
 // TerrainTile implementation
 //
 
-TerrainTile::TerrainTile() : texture_found(false) {}
-TerrainTile::~TerrainTile() {}
+TextureMap TerrainTile::texture_dictionary("textures/terrain.texture");
 
-const char TerrainTile::texture() {
+TerrainTile::TerrainTile() : texture_found(false){}
+TerrainTile::~TerrainTile(){}
+
+const char TerrainTile::texture(){
   if(texture_found)
     return key_texture;
   else
       throw NULL_TEXTURE("generic terrain tile");
 }
 
+ostream& operator<< (ostream& buffer, const TerrainTile& source){
+  buffer << "{texture: " << source.key_texture << ", texture found: " << source.texture_found << ", textures: " << source.texture_dictionary << "}";
+  return buffer;
+}
+
 //
 // PassableTile implementation
 //
 
-PassableTile::PassableTile() {}
-PassableTile::~PassableTile() {}
+PassableTile::PassableTile(){}
+PassableTile::~PassableTile(){}
 
-const bool PassableTile::is_passable() {
+const bool PassableTile::is_passable(){
   return true;
 }
 
@@ -29,10 +36,10 @@ const bool PassableTile::is_passable() {
 // UnpassableTile implementation
 //
 
-UnpassableTile::UnpassableTile() {}
-UnpassableTile::~UnpassableTile() {}
+UnpassableTile::UnpassableTile(){}
+UnpassableTile::~UnpassableTile(){}
 
-const bool UnpassableTile::is_passable() {
+const bool UnpassableTile::is_passable(){
   return false;
 }
 
@@ -40,10 +47,10 @@ const bool UnpassableTile::is_passable() {
 // Water implementation
 //
 
-Water::Water(const TextureMap &textures) {
-  for(int i = 0; i < textures.size; ++i) {
-    if(strcmp(textures.tile_types[i], "Water") == 0) {
-      key_texture = textures.textures[i];
+Water::Water(){
+  for(int i = 0; i < texture_dictionary.size; ++i){
+    if(strcmp(texture_dictionary.texture_name[i], "Water") == 0){
+      key_texture = texture_dictionary.texture_list[i];
       texture_found = true;
     }
   }
@@ -52,20 +59,20 @@ Water::Water(const TextureMap &textures) {
     throw NULL_TEXTURE("water");
 }
 
-const int Water::get_move_energy() {
+const int Water::get_move_energy(){
   return 1;
 }
 
-Water::~Water() {}
+Water::~Water(){}
 
 //
 // Rocks implementation
 //
 
-Rocks::Rocks(const TextureMap &textures) {
-  for(int i = 0; i < textures.size; ++i) {
-    if(strcmp(textures.tile_types[i], "Rock") == 0) {
-      key_texture = textures.textures[i];
+Rocks::Rocks(){
+  for(int i = 0; i < texture_dictionary.size; ++i){
+    if(strcmp(texture_dictionary.texture_name[i], "Rock") == 0){
+      key_texture = texture_dictionary.texture_list[i];
       texture_found = true;
     }
   }
@@ -74,20 +81,20 @@ Rocks::Rocks(const TextureMap &textures) {
     throw NULL_TEXTURE("Rock");
 }
 
-const int Rocks::get_move_energy() {
+const int Rocks::get_move_energy(){
   return 4;
 }
 
-Rocks::~Rocks() {}
+Rocks::~Rocks(){}
 
 //
 // Tree implementation
 //
 
-Tree::Tree(const TextureMap &textures) {
-  for(int i = 0; i < textures.size; ++i) {
-    if(strcmp(textures.tile_types[i], "Tree") == 0) {
-      key_texture = textures.textures[i];
+Tree::Tree(){
+  for(int i = 0; i < texture_dictionary.size; ++i){
+    if(strcmp(texture_dictionary.texture_name[i], "Tree") == 0){
+      key_texture = texture_dictionary.texture_list[i];
       texture_found = true;
     }
   }
@@ -96,20 +103,20 @@ Tree::Tree(const TextureMap &textures) {
     throw NULL_TEXTURE("Tree");
 }
 
-const int Tree::get_move_energy() {
+const int Tree::get_move_energy(){
   return 4;
 }
 
-Tree::~Tree() {}
+Tree::~Tree(){}
 
 //
 // Plains implementation
 //
 
-Plains::Plains(const TextureMap &textures) {
-  for(int i = 0; i < textures.size; ++i) {
-    if(strcmp(textures.tile_types[i], "Plains") == 0) {
-      key_texture = textures.textures[i];
+Plains::Plains(){
+  for(int i = 0; i < texture_dictionary.size; ++i){
+    if(strcmp(texture_dictionary.texture_name[i], "Plains") == 0){
+      key_texture = texture_dictionary.texture_list[i];
       texture_found = true;
     }
   }
@@ -118,8 +125,8 @@ Plains::Plains(const TextureMap &textures) {
     throw NULL_TEXTURE("plains");
 }
 
-const int Plains::get_move_energy() {
+const int Plains::get_move_energy(){
   return 2;
 }
 
-Plains::~Plains() {}
+Plains::~Plains(){}

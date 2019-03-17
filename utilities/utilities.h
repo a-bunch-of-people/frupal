@@ -8,21 +8,24 @@
 #include <chrono>
 #include <thread>
 
-namespace frupal_utils {
+namespace frupal_utils{
   //
   // Utility stuff
   //
 
-  struct position {
+  struct Position{
     int x;
     int y;
-    int z;
 
-    position();
-    position(const int, const int, const int);
+    Position();
+    Position(const Position&);
+    Position(const int, const int);
+    Position operator + (const Position &);
+    Position operator - (const Position &);
+    friend std::ostream& operator << (std::ostream &, const Position &);
   };
 
-  struct NULL_TEXTURE {
+  struct NULL_TEXTURE{
     char* obj_type;
 
     NULL_TEXTURE(const char*);
@@ -31,21 +34,19 @@ namespace frupal_utils {
   };
 
   struct TextureMap{
-    char** tile_types;
-    char* textures;
+    char** texture_name;
+    char* texture_list;
     int size;
 
-    TextureMap();
+    TextureMap(const char*);
     ~TextureMap();
-    void display();
+    friend std::ostream& operator << (std::ostream &, const TextureMap &);
   };
 
-  void load_textures(TextureMap&, const char*);
   void sleep(const int);
 
   const int MAX_STREAM_SIZE = 64;
   const int THREAD_HALT_TIME = 15; // Time in miliseconds
-  const bool DEBUG = false;
 }
 
 #endif

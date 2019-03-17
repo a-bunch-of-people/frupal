@@ -2,16 +2,18 @@
 #define FRUPAL_PLAYER_H
 
 #include "../character/character.h"
+#include "../board/board.h"
 #include "../utilities/utilities.h"
 
-class Player: public Character {
+class Player: public Character{
   public:
-    Player(const TextureMap&, const int, const int, const char*, const int, const int);
+    Player(const Position&, const int, const int);
     ~Player();
-    void left(Board &);
-    void down(Board &);
-    void right(Board &);
-    void up(Board &);
+
+    const bool left();
+    const bool down();
+    const bool right();
+    const bool up();
 
   protected:
     int texture_found;

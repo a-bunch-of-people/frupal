@@ -8,9 +8,10 @@
 using namespace std;
 using namespace frupal_utils;
 
-class TerrainTile {
+class TerrainTile{
   protected:
       // Stuff to define later
+      static TextureMap texture_dictionary;
       char key_texture;
       bool texture_found;
 
@@ -25,9 +26,10 @@ class TerrainTile {
 
       // General function stuff
       const char texture();
+      friend std::ostream& operator << (std::ostream &, const TerrainTile &);
 };
 
-class PassableTile: public TerrainTile {
+class PassableTile: public TerrainTile{
   public:
       // Constructors/Destructors
       PassableTile();
@@ -37,7 +39,7 @@ class PassableTile: public TerrainTile {
       const bool is_passable();
 };
 
-class UnpassableTile: public TerrainTile {
+class UnpassableTile: public TerrainTile{
   public:
       // Constructors/Destructors
       UnpassableTile();
@@ -47,40 +49,40 @@ class UnpassableTile: public TerrainTile {
       const bool is_passable();
 };
 
-class Water: public UnpassableTile {
+class Water: public UnpassableTile{
   public:
     // Constructors/Destructors
-    Water(const TextureMap&);
+    Water();
     ~Water();
 
     // General function stuff
     const int get_move_energy();
 };
 
-class Rocks: public UnpassableTile {
+class Rocks: public UnpassableTile{
   public:
     // Constructors/Destructors
-    Rocks(const TextureMap&);
+    Rocks();
     ~Rocks();
 
     // General function stuff
     const int get_move_energy();
 };
 
-class Tree: public UnpassableTile {
+class Tree: public UnpassableTile{
   public:
     // Constructors/Destructors
-    Tree(const TextureMap&);
+    Tree();
     ~Tree();
 
     // General function stuff
     const int get_move_energy();
 };
 
-class Plains: public PassableTile {
+class Plains: public PassableTile{
   public:
     // Constructors/Destructors
-    Plains(const TextureMap&);
+    Plains();
     ~Plains();
 
     // General function stuff

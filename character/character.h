@@ -6,46 +6,33 @@
 #include <ncurses.h>
 #include <unistd.h>
 #include "../utilities/utilities.h"
-#include "../board/board.h"
 
 using namespace std;
 using namespace frupal_utils;
 
 const char* concatenate(const char**);
 
-struct Event {
-  const int type;
-};
-
-struct Position {
-    int x;
-    int y;
-
-    Position(const int, const int);
-};
-
 // Base class for ANY Character in the game
 // Initialized by user input for each stat
-class Character {
-  protected:             // lower left = (1,1)Character
-      Position position;    // struct with int x, y
-                            // returned by getpos()
-      char * name;          // Character's name
-      int gold;             // Character's $$
-      int energy;           // Character's energy for moving
-      char key_texture;
+class Character{
+  protected:
+    static TextureMap texture_dictionary;
+    Position position;
+    int gold;
+    int energy;
 
-    public:
-        Character();       // default constructor
-        Character(const int start_x, const int start_y, const char * start_name, const int start_gold, const int start_energy);
-        ~Character();
+    char key_texture;
 
-        void display();
+  public:
+    Character();
+    Character(const Position&, const int, const int);
+    ~Character();
 
-        const Position * get_position();
-        const bool check_bounds();
-        void move(const Position, const Position, const Position);  // Up/Down, Left/Right
-
+    void show_character();
+    void hide_character();
+    Position& get_position();
+    void move(const Position, const Position, const Position);  // Up+Down, Left+Right
+    friend std::ostream& operator << (std::ostream &, const Character &);
 };
 
 class merchant: public Character

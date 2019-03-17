@@ -4,22 +4,22 @@
 // Player Implementation
 //
 
-Player::Player(const TextureMap& textures, const int x, const int y, const char* name, const int gold, const int energy) : Character(x, y, name, gold, energy), texture_found(0){
-  for(int i = 0; i < textures.size; ++i) {
-    if(strcmp(textures.tile_types[i], "PlayerLeft") == 0) {
-      texture_left = textures.textures[i];
+Player::Player(const Position& position, const int gold, const int energy) : Character(position, gold, energy), texture_found(0){
+  for(int i = 0; i < texture_dictionary.size; i++){
+    if(strcmp(texture_dictionary.texture_name[i], "PlayerLeft") == 0){
+      texture_left = texture_dictionary.texture_list[i];
       texture_found++;
     }
-    else if(strcmp(textures.tile_types[i], "PlayerDown") == 0){
-      texture_down = textures.textures[i];
+    else if(strcmp(texture_dictionary.texture_name[i], "PlayerDown") == 0){
+      texture_down = texture_dictionary.texture_list[i];
       texture_found++;
     }
-    else if(strcmp(textures.tile_types[i], "PlayerRight") == 0){
-      texture_right = textures.textures[i];
+    else if(strcmp(texture_dictionary.texture_name[i], "PlayerRight") == 0){
+      texture_right = texture_dictionary.texture_list[i];
       texture_found++;
     }
-    else if(strcmp(textures.tile_types[i], "PlayerUp") == 0){
-      texture_up = textures.textures[i];
+    else if(strcmp(texture_dictionary.texture_name[i], "PlayerUp") == 0){
+      texture_up = texture_dictionary.texture_list[i];
       texture_found++;
     }
   }
@@ -27,39 +27,27 @@ Player::Player(const TextureMap& textures, const int x, const int y, const char*
   if(texture_found < 4)
     throw NULL_TEXTURE("Player");
 
-  key_texture = texture_up;
-}
-
-Player::~Player() {}
-
-void Player::left(Board & board) {
-  Position new_pos(position.x - 1, position.y);
-  key_texture = texture_left;
-
-  if(board.isPassable(new_pos.x, new_pos.y))
-    move(new_pos, Position(1, 1), Position(50, 50));
-}
-
-void Player::down(Board & board) {
-  Position new_pos(position.x, position.y + 1);
-  key_texture = texture_down;
-
-  if(board.isPassable(new_pos.x, new_pos.y))
-    move(new_pos, Position(1, 1), Position(50, 50));
-}
-
-void Player::right(Board & board) {
-  Position new_pos(position.x + 1, position.y);
   key_texture = texture_right;
-
-  if(board.isPassable(new_pos.x, new_pos.y))
-    move(new_pos, Position(1, 1), Position(50, 50));
 }
 
-void Player::up(Board & board) {
-  Position new_pos(position.x, position.y - 1);
-  key_texture = texture_up;
+Player::~Player(){}
 
-  if(board.isPassable(new_pos.x, new_pos.y))
-    move(new_pos, Position(1, 1), Position(50, 50));
+const bool Player::left(){
+  key_texture = texture_left;
+  move(position - Position(1,0), Position(0,0), Position(100,100));
+}
+
+const bool Player::down(){
+  key_texture = texture_down;
+  move(position + Position(0,1), Position(0,0), Position(100,100));
+}
+
+const bool Player::right(){
+  key_texture = texture_right;
+  move(position + Position(1,0), Position(0,0), Position(100,100));
+}
+
+const bool Player::up(){
+  key_texture = texture_up;
+  move(position - Position(0,1), Position(0,0), Position(100,100));
 }

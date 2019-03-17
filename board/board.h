@@ -10,78 +10,37 @@
 #include "../utilities/utilities.h"
 
 using namespace std;
+using namespace frupal_utils;
 
+class Board{
+	private:
+		struct Tile{
+			TerrainTile* terrain;
+			bool visited;
 
-class Board {
+			Tile();
+			~Tile();
+		};
+
+		Tile** game_board;
+		int tile_count;
+		int matrix_height;
+		int matrix_width;
+
+		void set_board(); // randomly sets up board.
+		const int random_output(const int); // generates a random number
+		TerrainTile* fill_spaces(const int rndInput); // fills the matrix with terrain
+
 	public:
 		Board();
-		Board(const int);	//constructor
-
-		void showBoard();	// user can display board from main
-		void showTerrain();	// user can display all the board
-		void showALL();		// can give up and see everything
-		void showVisited();
-
-		void showBoard(const int x, const int y);	// user can display board from main
-		void showTerrain(const int x, const int y);	// user can display all the board
-		void showALL(const int x, const int y);		// can give up and see everything
-		void showVisited(const int x, const int y);
-
-
-		const bool isPassable(const int, const int);
-		int userValue();
+		Board(const int);
 		~Board();
 
-	private:
-		void setBoard();		// randomly sets up board.
-		int randomOutput();		// generates a random number
-		TerrainTile* fillSpaces(int rndInput);	// fills the matrix with terrain
+		void show_all();
+		void show_visited();
+		void show_mask();
 
-
-	protected:
-		struct boardSpace {
-			boardSpace();
-			~boardSpace();
-			TerrainTile* terrain;
-			char unknownBlank;
-			int visited;
-		};
-
-		struct posXY { //position
-			int x;
-			int y;
-		};
-
-		boardSpace ** gameSpace;  // struct that has 3 qualities.
-		// blank tile for user to uncover
-		// tile with terrain
-		// and a tracker to keep track of which tile has been seen
-		int gridSize;		 // variable for user input on matrix size
+		const bool is_passable(const Position&);
 };
 
-// Hey, Dmitri, all the void functions below will be updated as posXY functions
-// to pass the updated locations to the player entity when called.
-// I'll do that by Friday. (possibly Thursday night).
-class BoardUpdate : public Board {
-public:
-	BoardUpdate(posXY &position, int matrixSize);
-	BoardUpdate(posXY &position, const Board & board);
-	posXY &up(posXY &position);		// this will take and pass a struct w/ xy coords
-	posXY &down(posXY &position);		// same
-	posXY &left(posXY &position);		// same
-	posXY &right(posXY &position);		// same
-	void location();
-	void updateLocation();
-	void visited();		// updates tile from unseen 0 to seen 1
-
-
-
-private:
-	posXY pos;
-
-
-};
-
-
-
-#endif //PCH_H
+#endif
