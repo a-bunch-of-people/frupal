@@ -43,7 +43,7 @@ int Board::randomOutput(){
 	typedef std::mt19937 myRNG;  // the Mersenne Twister with a popular choice of parameters
 	myRNG rng;
 	rng.seed(time(NULL));
-	std::uniform_int_distribution<int> dist(0, 3); // range [1,19]
+	std::uniform_int_distribution<int> dist(0, 99); // range [1,19]
 	std::random_device rand;
 	return dist(rand);
 }
@@ -55,17 +55,17 @@ TerrainTile*  Board::fillSpaces(int rndInput) {
 
 	TerrainTile* val = new Plains(TERRAIN_TEXTURES); //default value plains/meadow.
 
-	switch (rndInput){
-		case 0: val = new Rocks(TERRAIN_TEXTURES);	//   rocks
-			break;
-		case 1: val = new Water(TERRAIN_TEXTURES);	//  water
-			break;
-		case 2: val = new Tree(TERRAIN_TEXTURES);	//  tree
-			break;
-		case 3: val = new Plains(TERRAIN_TEXTURES);	// plains
-			break;
-		default:
-			break;
+	if(rndInput >= 0 && rndInput < 50){
+		val = new Plains(TERRAIN_TEXTURES);
+	}
+	else if(rndInput >= 50 && rndInput < 80){
+		val = new Tree(TERRAIN_TEXTURES);
+	}
+	else if(rndInput >= 80 && rndInput < 95){
+		val = new Water(TERRAIN_TEXTURES);
+	}
+	else if(rndInput >= 95 && rndInput < 100){
+		val = new Rocks(TERRAIN_TEXTURES);
 	}
 
 	return val;
