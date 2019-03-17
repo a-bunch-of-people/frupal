@@ -15,22 +15,22 @@ TEST_CASE("Check plains is passable"){
   CHECK(tile->is_passable() == true);
 }
 
-TEST_CASE("Check Water takes 2 energy to not move across"){
+TEST_CASE("Check Water takes 1 energy to not move across"){
   Water* tile = new Water();
   CHECK(tile->get_move_energy() == 1);
 }
 
-TEST_CASE("Check Rocks takes 2 energy to not move across"){
+TEST_CASE("Check Rocks takes 4 energy to not move across"){
   Rocks* tile = new Rocks();
   CHECK(tile->get_move_energy() == 4);
 }
 
-TEST_CASE("Check Tree takes 2 energy to not move across"){
+TEST_CASE("Check Tree takes 4 energy to not move across"){
   Tree* tile = new Tree();
   CHECK(tile->get_move_energy() == 4);
 }
 
-TEST_CASE("Check Plains takes 1 energy to move across"){
+TEST_CASE("Check Plains takes 2 energy to move across"){
   Plains* tile = new Plains();
   CHECK(tile->get_move_energy() == 2);
 }
