@@ -2,3 +2,4 @@
 frupal
 tests/ALL_TESTS
 *.o
+vgcore*

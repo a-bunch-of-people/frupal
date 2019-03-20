@@ -3,10 +3,11 @@
 int main(const int argc, char** argv){
   using namespace frupal_utils;
 
-  Board board(50, 50);
-  Player player(board.find_open_tile(Position(0,0), Position(10,10)), 3, 100);
+  Board board(200, 20);
+  // Player player(board.find_open_tile(Position(0,0), Position(10,10)), 3, 100);
 
   board.show_all(true);
+  board.show_mask(true);
 
   // char input;
 

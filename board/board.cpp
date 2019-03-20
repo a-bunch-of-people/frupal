@@ -8,18 +8,32 @@ Board::Board() : matrix_width(0), matrix_height(0), game_board(NULL){}
 Board::Board(const int matrix_width, const int matrix_height) : matrix_width(matrix_width), matrix_height(matrix_height){
 	game_board = new Tile*[matrix_width];
 
-	for(int x = 0; x < matrix_width; ++x)
-		for(int y = 0; y < matrix_height; ++y)
-			game_board[x][y] = fill_spaces(random_output(99));
+	for(int i = 0; i < matrix_width; ++i)
+		game_board[i] = new Tile[matrix_height];
+
+	for(int x = 0; x < matrix_width; ++x){
+		for(int y = 0; y < matrix_height; ++y){
+			game_board[x][y] = Tile(fill_spaces(random_output(99)));
+		}
+	}
 }
 
-Board::~Board(){}
+Board::~Board(){
+	// for(int x = 0; x < matrix_width; ++x){
+	// 	for(int y = 0; y < matrix_height; ++y){
+	// 		delete game_board[x][y];
+	// 	}
+	// 	delete game_board[x];
+	// }
+	//
+	// delete [] game_board;
+}
 
 const int Board::random_output(const int range){
 	typedef std::mt19937 myRNG;  // the Mersenne Twister with a popular choice of parameters
 	myRNG rng;
 	rng.seed(time(NULL));
-	std::uniform_int_distribution<int> dist(0, range); // range [1,19]
+	std::uniform_int_distribution<int> dist(0, range); // range [1, range]
 	std::random_device rand;
 	return dist(rand);
 }
@@ -81,6 +95,8 @@ const Position& find_open_tile(const Position& p1, const Position& p2){
 	}
 
 	// for(int y = p1.y,)
+
+	return Position(0,0);
 }
 
 //
@@ -88,7 +104,13 @@ const Position& find_open_tile(const Position& p1, const Position& p2){
 //
 Board::Tile::Tile() : terrain(NULL), visited(false){}
 
+Board::Tile::Tile(const Tile& source) : visited(source.visited) {
+	if(terrain)
+		delete terrain;
+
+	terrain = source.terrain;
+}
+
 Board::Tile::Tile(TerrainTile* terrain) : terrain(terrain), visited(false) {}
 
-Board::Tile::~Tile(){	if(terrain){ delete terrain; };
-}
+Board::Tile::~Tile(){	delete terrain; }

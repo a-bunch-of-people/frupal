@@ -19,13 +19,14 @@ class Board{
 			bool visited;
 
 			Tile();
+			Tile(const Tile&);
 			Tile(TerrainTile*);
 			~Tile();
 		};
 
 		Tile** game_board;
-		const int matrix_width;
-		const int matrix_height;
+		int matrix_width;
+		int matrix_height;
 
 		const int random_output(const int); // generates a random number
 		TerrainTile* fill_spaces(const int rndInput); // fills the matrix with terrain
