@@ -18,6 +18,10 @@ namespace frupal_utils{
   Position Position::operator + (const Position & src){ return Position(this->x + src.x, this->y + src.y); }
   Position Position::operator - (const Position & src){ return Position(this->x - src.x, this->y - src.y); }
 
+  const double operator% (const Position& p1, const Position& p2){
+    return sqrt(pow((p1.x - p2.x), 2) + pow((p1.y - p2.y), 2));
+  }
+
   std::ostream& operator<< (std::ostream & buffer, const Position& source){
     buffer << "(" << source.x << "," << source.y << ")";
     return buffer;

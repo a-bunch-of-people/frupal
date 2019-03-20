@@ -9,7 +9,7 @@ Board::Board(const int matrix_height) : matrix_height(matrix_height){
 	matrix_width = ((matrix_height * 9) / 4);
 	tile_count = matrix_width * matrix_height;
 
-	game_board = new Tile*[tile_count];
+	game_board = new Tile*[matrix_width];
 
 	for (int i = 0; i < matrix_width; ++i)
 		game_board[i] = new Tile[matrix_height];
@@ -51,8 +51,7 @@ TerrainTile*  Board::fill_spaces(const int num){
 void Board::show_all(){
 	for(int y = 0; y < matrix_height; y++){
 		for(int x = 0; x < matrix_width; x++)
-			cout << game_board[x][y].terrain->texture();
-		cout << endl;
+			mvaddch(y, x, game_board[x][y].terrain->texture());
 	}
 }
 
@@ -60,22 +59,21 @@ void Board::show_visited(){
 	for(int y = 0; y < matrix_height; y++){
 		for(int x = 0; x < matrix_width; x++){
 			if(game_board[x][y].visited)
-				cout << game_board[x][y].terrain->texture();
+				mvaddch(y, x, game_board[x][y].terrain->texture());
 		}
-		cout << endl;
 	}
 }
 
 void Board::show_mask(){
 	for(int y = 0; y < matrix_height; y++){
 		for(int x = 0; x < matrix_width; x++){
-			cout << game_board[x][y].visited;
+			mvaddch(y, x, game_board[x][y].visited);
 		}
-		cout << endl;
 	}
 }
 
 const bool Board::is_passable(const Position& position){
+	if(position.x < 0 || position.x == matrix_width || position.y < 0 || position.y == matrix_height) { return false; }
 	return (game_board[position.x][position.y].terrain->is_passable());
 }
 

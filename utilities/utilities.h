@@ -5,8 +5,8 @@
 #include <string.h>
 #include <istream>
 #include <fstream>
-#include <chrono>
 #include <thread>
+#include <math.h>
 
 namespace frupal_utils{
   //
@@ -22,6 +22,7 @@ namespace frupal_utils{
     Position(const int, const int);
     Position operator + (const Position &);
     Position operator - (const Position &);
+    friend const double operator % (const Position&, const Position&);
     friend std::ostream& operator << (std::ostream &, const Position &);
   };
 
@@ -42,6 +43,9 @@ namespace frupal_utils{
     ~TextureMap();
     friend std::ostream& operator << (std::ostream &, const TextureMap &);
   };
+
+  char* n_to_s(const int);
+  char* concat(const char*, const char*);
 
   void sleep(const int);
 

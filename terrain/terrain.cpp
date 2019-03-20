@@ -122,7 +122,7 @@ Plains::Plains(){
   }
 
   if(!texture_found)
-    throw NULL_TEXTURE("plains");
+    throw NULL_TEXTURE("Plains");
 }
 
 const int Plains::get_move_energy(){

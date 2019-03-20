@@ -33,21 +33,46 @@ Player::Player(const Position& position, const int gold, const int energy) : Cha
 Player::~Player(){}
 
 const bool Player::left(){
-  key_texture = texture_left;
-  move(position - Position(1,0), Position(0,0), Position(100,100));
+  try{
+    key_texture = texture_left;
+    move(position - Position(1,0), Position(0,0), Position(100,100));
+    return true;
+  }
+  catch(...){
+    return false;
+  }
 }
 
 const bool Player::down(){
-  key_texture = texture_down;
-  move(position + Position(0,1), Position(0,0), Position(100,100));
+  try{
+    key_texture = texture_down;
+    move(position + Position(0,1), Position(0,0), Position(100,100));
+    return true;
+  }
+  catch(...){
+    return false;
+  }
 }
 
 const bool Player::right(){
-  key_texture = texture_right;
-  move(position + Position(1,0), Position(0,0), Position(100,100));
+  try{
+    key_texture = texture_right;
+    move(position + Position(1,0), Position(0,0), Position(100,100));
+    return true;
+  }
+  catch(...){
+    return false;
+  }
 }
 
 const bool Player::up(){
-  key_texture = texture_up;
-  move(position - Position(0,1), Position(0,0), Position(100,100));
+  try{
+    key_texture = texture_up;
+    move(position - Position(0,1), Position(0,0), Position(100,100));
+    return true;
+  }
+  catch(...){
+    exit(1);
+    return false;
+  }
 }
