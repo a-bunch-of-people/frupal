@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Frupal General Information
 
 ### Last Build: [![Build Status](https://travis-ci.org/a-bunch-of-people/frupal.svg?branch=master)](https://travis-ci.org/a-bunch-of-people/frupal)
@@ -33,3 +34,9 @@ player bank:
 >>>>>>> 4760844e75b3489a3f542c32c4ccb868d5a1d8f3
 =======
 >>>>>>> 4760844e75b3489a3f542c32c4ccb868d5a1d8f3
+=======
+# frupal
+A Game
+Game config options are now accessalbe in driver.cpp. These game parameters may be used by objects.
+So far only the board size is parameterized by the config file. 
+>>>>>>> 10a69efc6f0b2eb671d4c9ef60558b428da25200
