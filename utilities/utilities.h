@@ -34,6 +34,14 @@ namespace frupal_utils{
     void what();
   };
 
+  struct POSITION_OUT_OF_BOUNDS{
+    Position bad_position;
+
+    POSITION_OUT_OF_BOUNDS(const Position&);
+    ~POSITION_OUT_OF_BOUNDS();
+    void what();
+  };
+
   struct TextureMap{
     char** texture_name;
     char* texture_list;

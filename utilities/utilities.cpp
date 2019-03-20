@@ -44,6 +44,18 @@ namespace frupal_utils{
     cerr << "[ERROR]: No textures were found for the " << obj_type << " object!" << endl;
   }
 
+  POSITION_OUT_OF_BOUNDS::POSITION_OUT_OF_BOUNDS(const Position& bad_position) : bad_position(bad_position){}
+
+  POSITION_OUT_OF_BOUNDS::~POSITION_OUT_OF_BOUNDS(){}
+
+  void POSITION_OUT_OF_BOUNDS::what(){
+    cerr << "[ERROR]: Position was out of bounds: " << bad_position << endl;
+  }
+
+  //
+  // Texture Map Implementation
+  //
+
   TextureMap::TextureMap(const char* filename) : size(0){
     ifstream file;
     char* name = new char[MAX_STREAM_SIZE];

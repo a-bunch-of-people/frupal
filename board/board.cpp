@@ -3,32 +3,17 @@
 //
 // Board Implementation
 //
-Board::Board(){}
+Board::Board() : matrix_width(0), matrix_height(0), game_board(NULL){}
 
-Board::Board(const int matrix_height) : matrix_height(matrix_height){
-	matrix_width = ((matrix_height * 9) / 4);
-	tile_count = matrix_width * matrix_height;
-
+Board::Board(const int matrix_width, const int matrix_height) : matrix_width(matrix_width), matrix_height(matrix_height){
 	game_board = new Tile*[matrix_width];
 
-	for (int i = 0; i < matrix_width; ++i)
-		game_board[i] = new Tile[matrix_height];
-
-	set_board();
+	for(int x = 0; x < matrix_width; ++x)
+		for(int y = 0; y < matrix_height; ++y)
+			game_board[x][y] = fill_spaces(random_output(99));
 }
 
-Board::~Board(){
-
-}
-
-void Board::set_board(){
-	for (int x = 0; x < matrix_width; ++x){
-		for (int y = 0; y < matrix_height; ++y){
-			game_board[x][y].terrain = fill_spaces(random_output(99));
-			game_board[x][y].visited = (bool)(random_output(1));
-		}
-	}
-}
+Board::~Board(){}
 
 const int Board::random_output(const int range){
 	typedef std::mt19937 myRNG;  // the Mersenne Twister with a popular choice of parameters
@@ -48,27 +33,40 @@ TerrainTile*  Board::fill_spaces(const int num){
 	return val;
 }
 
-void Board::show_all(){
-	for(int y = 0; y < matrix_height; y++){
-		for(int x = 0; x < matrix_width; x++)
-			mvaddch(y, x, game_board[x][y].terrain->texture());
+void Board::show_all(){ show_all(false); }
+
+void Board::show_all(const bool std_buffer){
+	for(int y = 0; y < matrix_height; ++y){
+		for(int x = 0; x < matrix_width; ++x)
+			if(std_buffer){ cout << game_board[x][y].terrain->texture(); }
+			else{ mvaddch(y, x, game_board[x][y].terrain->texture()); }
+		if(std_buffer){ cout << endl; }
 	}
 }
 
-void Board::show_visited(){
-	for(int y = 0; y < matrix_height; y++){
-		for(int x = 0; x < matrix_width; x++){
-			if(game_board[x][y].visited)
-				mvaddch(y, x, game_board[x][y].terrain->texture());
+void Board::show_visited(const bool std_buffer){
+	for(int y = 0; y < matrix_height; ++y){
+		for(int x = 0; x < matrix_width; ++x){
+			if(game_board[x][y].visited){
+				if(std_buffer){ cout << game_board[x][y].terrain->texture(); }
+				else { mvaddch(y, x, game_board[x][y].terrain->texture()); }
+			}
+			else{
+				if(std_buffer){ cout << " "; }
+				else { mvaddch(y, x, ' '); }
+			}
 		}
+		if(std_buffer){ cout << endl; }
 	}
 }
 
-void Board::show_mask(){
-	for(int y = 0; y < matrix_height; y++){
-		for(int x = 0; x < matrix_width; x++){
-			mvaddch(y, x, game_board[x][y].visited);
+void Board::show_mask(const bool std_buffer){
+	for(int y = 0; y < matrix_height; ++y){
+		for(int x = 0; x < matrix_width; ++x){
+			if(std_buffer){ cout << game_board[x][y].visited; }
+			else { mvaddch(y, x, game_board[x][y].visited); }
 		}
+		if(std_buffer){ cout << endl; }
 	}
 }
 
@@ -77,12 +75,20 @@ const bool Board::is_passable(const Position& position){
 	return (game_board[position.x][position.y].terrain->is_passable());
 }
 
+const Position& find_open_tile(const Position& p1, const Position& p2){
+	if(p2.x > p1.x || p2.y > p1.y) {
+		// throw POSITION_OUT_OF_BOUNDS((p2 - p1));
+	}
+
+	// for(int y = p1.y,)
+}
+
 //
 // Tile implementation
 //
-Board::Tile::Tile() : terrain(new Plains()), visited(false) {}
+Board::Tile::Tile() : terrain(NULL), visited(false){}
 
-Board::Tile::~Tile(){
-	if(terrain)
-		delete terrain;
+Board::Tile::Tile(TerrainTile* terrain) : terrain(terrain), visited(false) {}
+
+Board::Tile::~Tile(){	if(terrain){ delete terrain; };
 }
