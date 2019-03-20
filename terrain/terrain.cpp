@@ -17,7 +17,7 @@ const char TerrainTile::texture(){
 }
 
 ostream& operator<< (ostream& buffer, const TerrainTile& source){
-  buffer << "{texture: " << source.key_texture << ", texture found: " << source.texture_found << ", textures: " << source.texture_dictionary << "}";
+  buffer << "{ texture: " << source.key_texture << ", texture found: " << source.texture_found << ", textures: " << source.texture_dictionary << " }";
   return buffer;
 }
 
