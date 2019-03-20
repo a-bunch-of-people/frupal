@@ -1,10 +1,16 @@
 #include "creature.h"
 
 // param constructor for struct pos
-pos::pos(int the_x, int the_y): x(the_x), y(the_y) { }
+pos::pos(int the_x, int the_y): x(the_x), y(the_y)
+{
+
+}
 
 // default constructor for creature
-creature::creature(): x(0), y(0), position(0, 0), name(NULL), gold(0) { }
+creature::creature(): x(0), y(0), position(0, 0), name(NULL), gold(0)
+{
+
+}
 
 // param constructor for creature
 creature::creature(int start_x, int start_y, char * start_name, int start_gold): x(start_x), y(start_y), position(start_x, start_y), gold(start_gold)
@@ -22,14 +28,15 @@ creature::creature(const creature & obj): x(obj.x), y(obj.y), position(obj.x, ob
 
 creature::~creature()
 {
-    if(name) {
+    if(name)
+    {
         delete [] name;
     }
 }
 
 pos creature::get_pos()
 {
-  return position;
+    return position;
 }
 
 void creature::set_pos(const pos &to_set)
