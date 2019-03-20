@@ -34,14 +34,19 @@ Player::~Player(){}
 
 const int Player::get_view_radius() { return view_radius; }
 
+const int Player::get_energy() { return energy; }
+
+const int Player::get_gold() { return gold; }
+
 const int Player::add_gem(){ return ++gems_found; }
 
 const bool Player::carrying_max_gems() { return (gems_found == frupal_utils::MAX_GEMS); }
 
-const bool Player::left(){
+const bool Player::left(const int spent_energy){
   try{
     key_texture = texture_left;
     move(position - Position(1,0), Position(0,0), Position(100,100));
+    energy -= spent_energy;
     return true;
   }
   catch(...){
@@ -49,10 +54,11 @@ const bool Player::left(){
   }
 }
 
-const bool Player::down(){
+const bool Player::down(const int spent_energy){
   try{
     key_texture = texture_down;
     move(position + Position(0,1), Position(0,0), Position(100,100));
+    energy -= spent_energy;
     return true;
   }
   catch(...){
@@ -60,10 +66,11 @@ const bool Player::down(){
   }
 }
 
-const bool Player::right(){
+const bool Player::right(const int spent_energy){
   try{
     key_texture = texture_right;
     move(position + Position(1,0), Position(0,0), Position(100,100));
+    energy -= spent_energy;
     return true;
   }
   catch(...){
@@ -71,10 +78,11 @@ const bool Player::right(){
   }
 }
 
-const bool Player::up(){
+const bool Player::up(const int spent_energy){
   try{
     key_texture = texture_up;
     move(position - Position(0,1), Position(0,0), Position(100,100));
+    energy -= spent_energy;
     return true;
   }
   catch(...){

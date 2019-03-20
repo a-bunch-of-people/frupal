@@ -17,8 +17,8 @@ Board::Board(const int matrix_width, const int matrix_height, const int gem_coun
 		}
 	}
 
-	// for(int i = 0; i < gem_count; ++i)
-	place_gem();
+	for(int i = 0; i < gem_count; ++i)
+		place_gem();
 }
 
 Board::~Board(){
@@ -101,8 +101,14 @@ void Board::update_visited(const int radius, const Position& position){
 }
 
 void Board::place_gem(){
-	game_board[8][8] = new Tile(new Gem());
-	// game_board[random_output(matrix_width)][random_output(matrix_height)] = new Tile(new Gem());
+	// game_board[8][8] = new Tile(new Gem());
+	Position pos(random_output(matrix_width), random_output(matrix_height));
+	if(is_passable(pos)){
+		game_board[pos.x][pos.y] = new Tile(new Gem());
+	}
+	else{
+		place_gem();
+	}
 }
 
 void Board::remove_gem(const Position& position){
@@ -123,6 +129,10 @@ const Position Board::find_open_tile(const Position& p1, const Position& p2){
 	}
 
 	return Position(0,0);
+}
+
+const int Board::get_move_energy(const Position& position){
+	return game_board[position.x][position.y]->terrain->get_move_energy();
 }
 
 //

@@ -16,11 +16,6 @@ void Character::show_character(){
   mvaddch(position.y, position.x, key_texture);
 }
 
-void Character::hide_character(){
-  mvdelch(position.y, position.x);
-  // mvprintw(1,2, "Removed player at: (" + position.x + ", " + position.y + ")");
-}
-
 Position& Character::get_position(){ return position; }
 
 void Character::move(const Position new_pos, const Position top_left, const Position lower_right){
