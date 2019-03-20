@@ -78,7 +78,7 @@ void Board::show_visited(){
 void Board::show_mask(){
 	for(int y = 0; y < matrix_height; ++y)
 		for(int x = 0; x < matrix_width; ++x)
-			mvaddch(y, x, game_board[x][y]->visited);
+			mvprintw(y, x, to_string(game_board[x][y]->visited).c_str());
 }
 
 const bool Board::is_passable(const Position& position){
@@ -88,6 +88,16 @@ const bool Board::is_passable(const Position& position){
 
 const bool Board::is_gem(const Position& position){
 	return(game_board[position.x][position.y]->terrain->texture() == '?');
+}
+
+void Board::update_visited(const int radius, const Position& position){
+	for(int x = ((-1 * radius) + position.x); x <= (radius + position.x); ++x){
+		for(int y = ((-1 * radius)  + position.y); y <= (radius + position.y); ++y){
+			if(position.x >= 0 && position.x < matrix_width && position.y >= 0 && position.y < matrix_height){
+				game_board[x][y]->visited = true;
+			}
+		}
+	}
 }
 
 void Board::place_gem(){

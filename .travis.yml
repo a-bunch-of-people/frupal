@@ -11,11 +11,7 @@ branches:
     only:
         - master
 
-pre-install: ./pre-install.sh
-install: make test
+# pre-install: ./pre-install.sh
+# install: make test
 
-script:
-  - tests/ALL_TESTS
-
-homepage: https://a-bunch-of-people.github.io/frupal
-deploy: make e
+# script: tests/ALL_TESTS

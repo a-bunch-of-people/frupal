@@ -43,6 +43,7 @@ class Board{
 		void show_visited();
 		void show_mask();
 
+		void update_visited(const int, const Position&);
 		void place_gem();
 		void remove_gem(const Position&);
 

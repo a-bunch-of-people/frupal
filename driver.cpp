@@ -23,7 +23,7 @@ void screen_log(const char* string, const Position& value, const Position& posit
 int main(const int argc, char** argv){
   using namespace frupal_utils;
 
-  Board board(75, 50, 3);
+  Board board(50, 25, 3);
   Player player(board.find_open_tile(Position(10,10), Position(20,20)), 3, 100);
   char input;
   bool running = true;
@@ -55,8 +55,9 @@ int main(const int argc, char** argv){
     //
     // Main draw routine
     //
-    attron(COLOR_PAIR(1));
-    board.show_all();
+    // attron(COLOR_PAIR(1));
+    board.update_visited(player.get_view_radius(), player.get_position());
+    board.show_visited();
     attron(COLOR_PAIR(2));
     player.show_character();
 
@@ -77,21 +78,25 @@ int main(const int argc, char** argv){
       case 'a':
         if(board.is_passable(player.get_position() - Position(1,0))){
           player.left();
+          board.update_visited(player.get_view_radius(), player.get_position());
         }
         break;
       case 's':
         if(board.is_passable(player.get_position() + Position(0,1))){
           player.down();
+          board.update_visited(player.get_view_radius(), player.get_position());
         }
         break;
       case 'd':
         if(board.is_passable(player.get_position() + Position(1,0))){
           player.right();
+          board.update_visited(player.get_view_radius(), player.get_position());
         }
         break;
       case 'w':
         if(board.is_passable(player.get_position() - Position(0,1))){
           player.up();
+          board.update_visited(player.get_view_radius(), player.get_position());
         }
         break;
       case 'q':
