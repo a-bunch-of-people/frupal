@@ -1,7 +1,7 @@
 //#ifndef CREATURE_H
 //#define CREATURE_H
 
-#include "creature.h"
+#include "../creature/creature.h"
 
 #define STRMAX 30
 

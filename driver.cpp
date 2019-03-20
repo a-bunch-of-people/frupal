@@ -1,9 +1,6 @@
 #include "driver.h"
 
-
-const int MAP_WIDTH = 100;
-const int MAP_HEIGHT = 50;
-const int GEMS_COUNT = 6;
+const int GEMS_COUNT = 3;
 
 void clear_line(const Position& position){ // For the record, this is a stupid way to do this and I know this
   mvprintw(position.y, position.x, "                                  ");
@@ -36,17 +33,29 @@ void screen_log(const char* string, const Position& value, const Position& posit
   delete [] destination;
 }
 
-void centered_screen_log(const char* string){
-  int x_pos = MAP_WIDTH / 2 - strlen(string) / 2;
-  int y_pos = MAP_HEIGHT / 2;
+void centered_screen_log(const char* string, const Position& position){
+  screen_log(string, Position(position.x / 2, position.y / 2));
+}
 
-  screen_log(string, Position(x_pos, y_pos));
+void hotkey_bar(const Position& position){
+  screen_log("W: Move up", position);
+  screen_log("A: Move left", Position(position.x, position.y + 1));
+  screen_log("S: Move down", Position(position.x, position.y + 2));
+  screen_log("D: Move right", Position(position.x, position.y + 3));
 }
 
 int main(const int argc, char** argv){
   using namespace frupal_utils;
 
-  Board board(MAP_WIDTH, MAP_HEIGHT, GEMS_COUNT);
+  int map_width;
+  int map_height;
+
+  cout << "Enter a map width: ";
+  cin >> map_width;
+  cout << "Enter a map height: ";
+  cin >> map_height;
+
+  Board board(map_width, map_height, GEMS_COUNT);
   Player player(board.find_open_tile(Position(10,10), Position(20,20)), 3, 100);
   char input;
   bool running = true;
@@ -93,6 +102,7 @@ int main(const int argc, char** argv){
     screen_log("Player Energy: ", player.get_energy(), Position(0, height - (offset--)));
     screen_log("Player Gold: ", player.get_gold(), Position(0, height - (offset--)));
     screen_log("Input Key: ", input, Position(0, height - (offset--)));
+    hotkey_bar(Position((3 * width) / 4, (3 * height) / 4));
 
     //
     // Draw loaded buffer
