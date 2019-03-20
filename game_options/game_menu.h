@@ -16,14 +16,9 @@ class menu
 		~menu();
 		menu(const menu & old);		
 		const int size;
-//		string* gameConfig();	
-
 		string * gameConfig();
-		//string * options;
-		//const int size;
 
 	private: void gameConfig(string * options);
 		string * options;
-		//const int size;
 };
 #endif
