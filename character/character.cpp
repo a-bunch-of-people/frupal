@@ -18,6 +18,7 @@ void Character::show_character(){
 
 void Character::hide_character(){
   mvdelch(position.y, position.x);
+  // mvprintw(1,2, "Removed player at: (" + position.x + ", " + position.y + ")");
 }
 
 Position& Character::get_position(){ return position; }

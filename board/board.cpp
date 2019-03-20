@@ -3,88 +3,114 @@
 //
 // Board Implementation
 //
-Board::Board(){}
+Board::Board() :  game_board(NULL), matrix_width(0), matrix_height(0){}
 
-Board::Board(const int matrix_height) : matrix_height(matrix_height){
-	matrix_width = ((matrix_height * 9) / 4);
-	tile_count = matrix_width * matrix_height;
+Board::Board(const int matrix_width, const int matrix_height, const int gem_count) : matrix_width(matrix_width), matrix_height(matrix_height), gem_count(gem_count){
+	game_board = new Tile**[matrix_width];
 
-	game_board = new Tile*[tile_count];
+	for(int i = 0; i < matrix_width; ++i)
+		game_board[i] = new Tile*[matrix_height];
 
-	for (int i = 0; i < matrix_width; ++i)
-		game_board[i] = new Tile[matrix_height];
-
-	set_board();
+	for(int x = 0; x < matrix_width; ++x){
+		for(int y = 0; y < matrix_height; ++y){
+			game_board[x][y] = new Tile(fill_spaces(random_output(99)));
+		}
+	}
 }
 
 Board::~Board(){
-
-}
-
-void Board::set_board(){
-	for (int x = 0; x < matrix_width; ++x){
-		for (int y = 0; y < matrix_height; ++y){
-			game_board[x][y].terrain = fill_spaces(random_output(99));
-			game_board[x][y].visited = (bool)(random_output(1));
+	for(int x = 0; x < matrix_width; ++x){
+		for(int y = 0; y < matrix_height; ++y){
+			delete game_board[x][y];
 		}
+		delete game_board[x];
 	}
+
+	delete [] game_board;
 }
 
 const int Board::random_output(const int range){
 	typedef std::mt19937 myRNG;  // the Mersenne Twister with a popular choice of parameters
 	myRNG rng;
 	rng.seed(time(NULL));
-	std::uniform_int_distribution<int> dist(0, range); // range [1,19]
+	std::uniform_int_distribution<int> dist(0, range); // range [1, range]
 	std::random_device rand;
 	return dist(rand);
 }
 
-TerrainTile*  Board::fill_spaces(const int num){
-	TerrainTile* val = new Plains();
-	if(num >= 0 && num < 80){					val = new Plains(); }
-	else if(num >= 80 && num < 90){		val = new Water(); }
-	else if(num >= 90 && num < 95){		val = new Tree(); }
-	else if(num >= 95 && num < 100){	val = new Rocks(); }
-	return val;
+TerrainTile* Board::fill_spaces(const int num){
+	if(num >= 0 && num < 80)				{ return new Plains(); }
+	else if(num >= 80 && num < 90)	{ return new Water(); }
+	else if(num >= 90 && num < 95)	{ return new Tree(); }
+	else if(num >= 95 && num < 100)	{ return new Rocks(); }
+	else 														{ return new Plains(); }
 }
 
 void Board::show_all(){
-	for(int y = 0; y < matrix_height; y++){
-		for(int x = 0; x < matrix_width; x++)
-			cout << game_board[x][y].terrain->texture();
+	for(int x = 0; x < matrix_width; ++x)
+		for(int y = 0; y < matrix_height; ++y)
+			mvaddch(y, x, game_board[x][y]->terrain->texture());
+}
+
+void Board::show_all(ostream& buffer){
+	for(int x = 0; x < matrix_width; ++x){
+		for(int y = 0; y < matrix_height; ++y)
+				buffer << game_board[x][y]->terrain->texture();
 		cout << endl;
 	}
+
 }
 
 void Board::show_visited(){
-	for(int y = 0; y < matrix_height; y++){
-		for(int x = 0; x < matrix_width; x++){
-			if(game_board[x][y].visited)
-				cout << game_board[x][y].terrain->texture();
-		}
-		cout << endl;
-	}
+	for(int y = 0; y < matrix_height; ++y)
+		for(int x = 0; x < matrix_width; ++x)
+			if(game_board[x][y]->visited)
+				mvaddch(y, x, game_board[x][y]->terrain->texture());
 }
 
 void Board::show_mask(){
-	for(int y = 0; y < matrix_height; y++){
-		for(int x = 0; x < matrix_width; x++){
-			cout << game_board[x][y].visited;
-		}
-		cout << endl;
-	}
+	for(int y = 0; y < matrix_height; ++y)
+		for(int x = 0; x < matrix_width; ++x)
+			mvaddch(y, x, game_board[x][y]->visited);
 }
 
 const bool Board::is_passable(const Position& position){
-	return (game_board[position.x][position.y].terrain->is_passable());
+	if(position.x < 0 || position.x == matrix_width || position.y < 0 || position.y == matrix_height) { return false; }
+	return (game_board[position.x][position.y]->terrain->is_passable());
+}
+
+const Position Board::find_open_tile(const Position& p1, const Position& p2){
+	for(int y = p1.y; y < p2.y; ++y){
+		for(int x = p1.x; x < p2.x; ++x){
+			Position temp(x,y);
+			if(is_passable(temp))
+				return temp;
+		}
+	}
+
+	return Position(0,0);
 }
 
 //
 // Tile implementation
 //
-Board::Tile::Tile() : terrain(new Plains()), visited(false) {}
+Tile::Tile() : terrain(NULL), visited(false){}
 
-Board::Tile::~Tile(){
+Tile::Tile(const Tile& source) : terrain(NULL), visited(source.visited) {
+	terrain = source.terrain;
+}
+
+Tile::Tile(TerrainTile* terrain) : visited(false){
+	this->terrain = NULL;
+	this->terrain = terrain;
+}
+
+Tile::~Tile(){
 	if(terrain)
 		delete terrain;
+}
+
+  std::ostream& operator<< (std::ostream & buffer, const Tile& source){
+	buffer << "{ tile: " << *source.terrain << ", visited: " << source.visited << " }";
+	return buffer;
 }

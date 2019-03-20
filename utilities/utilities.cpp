@@ -18,6 +18,10 @@ namespace frupal_utils{
   Position Position::operator + (const Position & src){ return Position(this->x + src.x, this->y + src.y); }
   Position Position::operator - (const Position & src){ return Position(this->x - src.x, this->y - src.y); }
 
+  const double operator% (const Position& p1, const Position& p2){
+    return sqrt(pow((p1.x - p2.x), 2) + pow((p1.y - p2.y), 2));
+  }
+
   std::ostream& operator<< (std::ostream & buffer, const Position& source){
     buffer << "(" << source.x << "," << source.y << ")";
     return buffer;
@@ -39,6 +43,18 @@ namespace frupal_utils{
   void NULL_TEXTURE::what(){
     cerr << "[ERROR]: No textures were found for the " << obj_type << " object!" << endl;
   }
+
+  POSITION_OUT_OF_BOUNDS::POSITION_OUT_OF_BOUNDS(const Position& bad_position) : bad_position(bad_position){}
+
+  POSITION_OUT_OF_BOUNDS::~POSITION_OUT_OF_BOUNDS(){}
+
+  void POSITION_OUT_OF_BOUNDS::what(){
+    cerr << "[ERROR]: Position was out of bounds: " << bad_position << endl;
+  }
+
+  //
+  // Texture Map Implementation
+  //
 
   TextureMap::TextureMap(const char* filename) : size(0){
     ifstream file;

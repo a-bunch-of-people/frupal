@@ -17,7 +17,7 @@ const char TerrainTile::texture(){
 }
 
 ostream& operator<< (ostream& buffer, const TerrainTile& source){
-  buffer << "{texture: " << source.key_texture << ", texture found: " << source.texture_found << ", textures: " << source.texture_dictionary << "}";
+  buffer << "{ texture: " << source.key_texture << ", texture found: " << source.texture_found << ", textures: " << source.texture_dictionary << " }";
   return buffer;
 }
 
@@ -110,6 +110,28 @@ const int Tree::get_move_energy(){
 Tree::~Tree(){}
 
 //
+// Gem implementation
+//
+
+Gem::Gem(){
+  for(int i = 0; i < texture_dictionary.size; ++i){
+    if(strcmp(texture_dictionary.texture_name[i], "Gem") == 0){
+      key_texture = texture_dictionary.texture_list[i];
+      texture_found = true;
+    }
+  }
+
+  if(!texture_found)
+    throw NULL_TEXTURE("Gem");
+}
+
+const int Gem::get_move_energy(){
+  return 0;
+}
+
+Gem::~Gem(){}
+
+//
 // Plains implementation
 //
 
@@ -122,7 +144,7 @@ Plains::Plains(){
   }
 
   if(!texture_found)
-    throw NULL_TEXTURE("plains");
+    throw NULL_TEXTURE("Plains");
 }
 
 const int Plains::get_move_energy(){
