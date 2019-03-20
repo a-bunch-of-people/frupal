@@ -59,6 +59,7 @@ namespace frupal_utils{
 
   const int MAX_STREAM_SIZE = 64;
   const int THREAD_HALT_TIME = 15; // Time in miliseconds
+  const int MAX_GEMS = 3;
 }
 
 #endif

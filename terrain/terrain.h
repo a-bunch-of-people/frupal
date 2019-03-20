@@ -79,6 +79,16 @@ class Tree: public UnpassableTile{
     const int get_move_energy();
 };
 
+class Gem: public PassableTile{
+  public:
+    // Constructors/Destructors
+    Gem();
+    ~Gem();
+
+    // General function stuff
+    const int get_move_energy();
+};
+
 class Plains: public PassableTile{
   public:
     // Constructors/Destructors

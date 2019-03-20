@@ -10,10 +10,12 @@ notifications:
 branches:
     only:
         - master
-        - stable
-        - dmitri-dev
 
 pre-install: ./pre-install.sh
 install: make test
 
-script: tests/ALL_TESTS
+script:
+  - tests/ALL_TESTS
+
+homepage: https://a-bunch-of-people.github.io/frupal
+deploy: make e

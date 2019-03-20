@@ -1,12 +1,32 @@
 #include "driver.h"
 
+void screen_log(const char* string, const int value, const Position& position){
+  char* destination = new char[99];
+  strcpy(destination, string);
+  strcat(destination, to_string(value).c_str());
+  mvprintw(position.x, position.y, destination);
+  delete [] destination;
+}
+
+void screen_log(const char* string, const Position& value, const Position& position){
+  char* destination = new char[99];
+  strcpy(destination, string);
+  strcat(destination, "(");
+  strcat(destination, to_string(value.x).c_str());
+  strcat(destination, ", ");
+  strcat(destination, to_string(value.y).c_str());
+  strcat(destination, ")");
+  mvprintw(position.x, position.y, destination);
+  delete [] destination;
+}
+
 int main(const int argc, char** argv){
   using namespace frupal_utils;
 
-  Board board(75, 50);
-  Player player(board.find_open_tile(Position(0,0), Position(10,10)), 3, 100);
-
+  Board board(75, 50, 3);
+  Player player(board.find_open_tile(Position(10,10), Position(20,20)), 3, 100);
   char input;
+  bool running = true;
 
   //
   // Screen init stuff
@@ -26,7 +46,7 @@ int main(const int argc, char** argv){
   int width = 0;
   int height = 0;
 
-  while(true){
+  while(running){
     //
     // Maintenece stuff
     //
@@ -36,13 +56,17 @@ int main(const int argc, char** argv){
     // Main draw routine
     //
     attron(COLOR_PAIR(1));
-    board.show_visited();
+    board.show_all();
     attron(COLOR_PAIR(2));
     player.show_character();
 
     // Info and HUD
-    mvprintw(height - 3, 0, to_string(width).c_str());
+    screen_log("Player Position: ", player.get_position(), Position(height - 3, width - 40));
+    screen_log("Input Key: ", input, Position(height - 2, width - 40));
 
+    //
+    // Draw loaded buffer
+    //
     refresh();
 
     //
@@ -69,6 +93,12 @@ int main(const int argc, char** argv){
         if(board.is_passable(player.get_position() - Position(0,1))){
           player.up();
         }
+        break;
+      case 'q':
+        running = false;
+        break;
+      case 'g':
+        screen_log("Gems Found: ", player.add_gem(), Position(height - 5, 0));
         break;
       default:
         break;

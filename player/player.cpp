@@ -4,7 +4,7 @@
 // Player Implementation
 //
 
-Player::Player(const Position& position, const int gold, const int energy) : Character(position, gold, energy), texture_found(0){
+Player::Player(const Position& position, const int gold, const int energy) : Character(position, gold, energy), texture_found(0), gems_found(0){
   for(int i = 0; i < texture_dictionary.size; i++){
     if(strcmp(texture_dictionary.texture_name[i], "PlayerLeft") == 0){
       texture_left = texture_dictionary.texture_list[i];
@@ -31,6 +31,10 @@ Player::Player(const Position& position, const int gold, const int energy) : Cha
 }
 
 Player::~Player(){}
+
+const int Player::add_gem(){ return ++gems_found; }
+
+const bool Player::carrying_max_gems() { return (gems_found == frupal_utils::MAX_GEMS); }
 
 const bool Player::left(){
   try{

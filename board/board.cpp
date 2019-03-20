@@ -3,9 +3,9 @@
 //
 // Board Implementation
 //
-Board::Board() : matrix_width(0), matrix_height(0), game_board(NULL){}
+Board::Board() :  game_board(NULL), matrix_width(0), matrix_height(0){}
 
-Board::Board(const int matrix_width, const int matrix_height) : matrix_width(matrix_width), matrix_height(matrix_height){
+Board::Board(const int matrix_width, const int matrix_height, const int gem_count) : matrix_width(matrix_width), matrix_height(matrix_height), gem_count(gem_count){
 	game_board = new Tile**[matrix_width];
 
 	for(int i = 0; i < matrix_width; ++i)
@@ -80,13 +80,15 @@ const bool Board::is_passable(const Position& position){
 }
 
 const Position Board::find_open_tile(const Position& p1, const Position& p2){
-	// if(p2.x > p1.x || p2.y > p1.y) {
-	// 	throw POSITION_OUT_OF_BOUNDS((p2 - p1));
-	// }
-	//
-	// for(int y = p1.y,)
+	for(int y = p1.y; y < p2.y; ++y){
+		for(int x = p1.x; x < p2.x; ++x){
+			Position temp(x,y);
+			if(is_passable(temp))
+				return temp;
+		}
+	}
 
-	return Position(5,5);
+	return Position(0,0);
 }
 
 //

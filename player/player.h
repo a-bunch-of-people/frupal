@@ -10,6 +10,9 @@ class Player: public Character{
     Player(const Position&, const int, const int);
     ~Player();
 
+
+    const int add_gem();
+    const bool carrying_max_gems();
     const bool left();
     const bool down();
     const bool right();
@@ -17,6 +20,7 @@ class Player: public Character{
 
   protected:
     int texture_found;
+    int gems_found;
     char texture_left;
     char texture_down;
     char texture_right;

@@ -110,6 +110,28 @@ const int Tree::get_move_energy(){
 Tree::~Tree(){}
 
 //
+// Gem implementation
+//
+
+Gem::Gem(){
+  for(int i = 0; i < texture_dictionary.size; ++i){
+    if(strcmp(texture_dictionary.texture_name[i], "Gem") == 0){
+      key_texture = texture_dictionary.texture_list[i];
+      texture_found = true;
+    }
+  }
+
+  if(!texture_found)
+    throw NULL_TEXTURE("Gem");
+}
+
+const int Gem::get_move_energy(){
+  return 0;
+}
+
+Gem::~Gem(){}
+
+//
 // Plains implementation
 //
 
