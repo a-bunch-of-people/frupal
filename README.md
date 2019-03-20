@@ -4,7 +4,16 @@
 
 ### Hotkeys-n-Stuff
 
-* Debug Mode: CTRL+F5
+#### Movement
+
+* a: move left
+* s: move down
+* d: move right
+* w: move up
+
+#### Other
+* q: quit game
+* g: add gem
 
 ### Important Links:
 

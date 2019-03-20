@@ -5,8 +5,6 @@
 //
 
 namespace frupal_utils{
-  using namespace std;
-
   //
   // Universal position structure
   //
@@ -41,7 +39,7 @@ namespace frupal_utils{
   }
 
   void NULL_TEXTURE::what(){
-    cerr << "[ERROR]: No textures were found for the " << obj_type << " object!" << endl;
+    std::cerr << "[ERROR]: No textures were found for the " << obj_type << " object!" << std::endl;
   }
 
   POSITION_OUT_OF_BOUNDS::POSITION_OUT_OF_BOUNDS(const Position& bad_position) : bad_position(bad_position){}
@@ -49,7 +47,7 @@ namespace frupal_utils{
   POSITION_OUT_OF_BOUNDS::~POSITION_OUT_OF_BOUNDS(){}
 
   void POSITION_OUT_OF_BOUNDS::what(){
-    cerr << "[ERROR]: Position was out of bounds: " << bad_position << endl;
+    std::cerr << "[ERROR]: Position was out of bounds: " << bad_position << std::endl;
   }
 
   //
@@ -57,7 +55,7 @@ namespace frupal_utils{
   //
 
   TextureMap::TextureMap(const char* filename) : size(0){
-    ifstream file;
+    std::ifstream file;
     char* name = new char[MAX_STREAM_SIZE];
     char* list = new char[MAX_STREAM_SIZE];
 

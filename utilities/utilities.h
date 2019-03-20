@@ -52,14 +52,11 @@ namespace frupal_utils{
     friend std::ostream& operator << (std::ostream &, const TextureMap &);
   };
 
-  char* n_to_s(const int);
-  char* concat(const char*, const char*);
-
   void sleep(const int);
 
   const int MAX_STREAM_SIZE = 64;
   const int THREAD_HALT_TIME = 15; // Time in miliseconds
   const int MAX_GEMS = 3;
-}
+};
 
 #endif

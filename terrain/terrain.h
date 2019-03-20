@@ -2,7 +2,6 @@
 #define FRUPAL_TERRAIN_H
 
 #include <iostream>
-#include <string.h>
 #include "../utilities/utilities.h"
 
 using namespace std;

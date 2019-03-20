@@ -5,7 +5,6 @@
 #include <time.h>
 #include <random>
 #include <ncurses.h>
-#include <unistd.h>
 #include "../terrain/terrain.h"
 #include "../utilities/utilities.h"
 
@@ -44,9 +43,12 @@ class Board{
 		void show_visited();
 		void show_mask();
 
-		void place_gem(const Position&);
+		void update_visited(const int, const Position&);
+		void place_gem();
+		void remove_gem(const Position&);
 
 		const bool is_passable(const Position&);
+		const bool is_gem(const Position&);
 		const Position find_open_tile(const Position&, const Position&);
 };
 

@@ -11,6 +11,7 @@ class Player: public Character{
     ~Player();
 
 
+    const int get_view_radius();
     const int add_gem();
     const bool carrying_max_gems();
     const bool left();
@@ -21,6 +22,7 @@ class Player: public Character{
   protected:
     int texture_found;
     int gems_found;
+    int view_radius;
     char texture_left;
     char texture_down;
     char texture_right;
