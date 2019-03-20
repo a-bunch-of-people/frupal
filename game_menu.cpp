@@ -10,7 +10,7 @@ menu::menu() : size(10)
 
 menu::~menu() 
 {
-	 delete [] options;
+	delete [] options;
 }
 
 menu::menu(const menu & old) : size(10)
@@ -23,6 +23,7 @@ string * menu::gameConfig()
 	string * options = new string[size];
 	gameConfig(options);
 
+
 	for(int i = 0; i < size; i++)
 	{
 		cout << "options: " << options[i] << endl;
@@ -34,10 +35,10 @@ string * menu::gameConfig()
 		catch(std::out_of_range& e){
 			cout << "No data entered for config option." << endl;
 		}
-
 	}
-
-	return options;
+//Returns an array of strings containing
+//game config options
+return options;
 }
 
 void menu::gameConfig(string * options)
