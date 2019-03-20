@@ -1,11 +1,21 @@
 #include "driver.h"
+#include "game_menu.h"
+#include <sstream>
 
 int main(const int argc, char** argv){
   using namespace frupal_utils;
+  using namespace std;
 
+  //Game config parameters
+  menu object;
+  int board_size = 0;
+  string * result = object.gameConfig();
+  stringstream value(result[0]);
   Player player(Position(10,10), 3, 100);
-  Board board(50);
+  value >> board_size;
+  Board board(board_size);
   char input;
+  delete [] result;
 
   // Screen init stuff
   initscr();

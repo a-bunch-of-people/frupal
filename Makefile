@@ -2,7 +2,8 @@ CC = g++
 FLAGS = -lcurses -g3 -Wall -std=c++11
 
 HEAD = $(filter-out tests/*.h, $(wildcard *.h)  $(wildcard */*.h))
-SRC = $(filter-out tests/terrain_tests.cpp, $(wildcard *.cpp)  $(wildcard */*.cpp))
+SRC = $(filter-out tests/terrain_tests.cpp, $(wildcard *.cpp)  $(wildcard */*.cpp)) -lncurses
+
 
 TEST_HEAD = $(filter-out driver.h, $(wildcard *.h)  $(wildcard */*.h))
 TEST_SRC = $(filter-out driver.cpp, $(wildcard *.cpp)  $(wildcard */*.cpp))
