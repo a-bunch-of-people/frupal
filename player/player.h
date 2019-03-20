@@ -12,12 +12,13 @@ class Player: public Character{
 
 
     const int get_view_radius();
+    const int get_energy();
     const int add_gem();
     const bool carrying_max_gems();
-    const bool left();
-    const bool down();
-    const bool right();
-    const bool up();
+    const bool left(const int);
+    const bool down(const int);
+    const bool right(const int);
+    const bool up(const int);
 
   protected:
     int texture_found;

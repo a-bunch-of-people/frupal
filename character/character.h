@@ -28,7 +28,6 @@ class Character{
     ~Character();
 
     void show_character();
-    void hide_character();
     Position& get_position();
     void move(const Position, const Position, const Position);  // Up+Down, Left+Right
     friend std::ostream& operator << (std::ostream &, const Character &);

@@ -50,6 +50,7 @@ class Board{
 		const bool is_passable(const Position&);
 		const bool is_gem(const Position&);
 		const Position find_open_tile(const Position&, const Position&);
+		const int get_move_energy(const Position&);
 };
 
 #endif
