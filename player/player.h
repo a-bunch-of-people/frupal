@@ -13,6 +13,7 @@ class Player: public Character{
 
     const int get_view_radius();
     const int get_energy();
+    const int get_gold();
     const int add_gem();
     const bool carrying_max_gems();
     const bool left(const int);

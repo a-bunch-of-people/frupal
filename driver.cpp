@@ -91,6 +91,7 @@ int main(const int argc, char** argv){
     int offset = 10;
     screen_log("Player Position: ", player.get_position(), Position(0, height - (offset--)));
     screen_log("Player Energy: ", player.get_energy(), Position(0, height - (offset--)));
+    screen_log("Player Gold: ", player.get_gold(), Position(0, height - (offset--)));
     screen_log("Input Key: ", input, Position(0, height - (offset--)));
 
     //

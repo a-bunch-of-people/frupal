@@ -36,6 +36,8 @@ const int Player::get_view_radius() { return view_radius; }
 
 const int Player::get_energy() { return energy; }
 
+const int Player::get_gold() { return gold; }
+
 const int Player::add_gem(){ return ++gems_found; }
 
 const bool Player::carrying_max_gems() { return (gems_found == frupal_utils::MAX_GEMS); }
