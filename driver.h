@@ -5,7 +5,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include <ncurses.h>
-#include <unistd.h>
 
 // Local Libraries
 #include "player/player.h"

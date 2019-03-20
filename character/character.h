@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstring>
 #include <ncurses.h>
-#include <unistd.h>
 #include "../utilities/utilities.h"
 
 using namespace std;

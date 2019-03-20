@@ -40,7 +40,7 @@ int main(const int argc, char** argv){
   keypad(stdscr,TRUE);
   start_color();
   init_color(COLOR_RED, 2500, 0, 0);
-  init_pair(1, COLOR_BLUE, COLOR_BLACK); // Default Colors
+  init_pair(1, COLOR_GREEN, COLOR_BLACK); // Default Colors
   init_pair(2, COLOR_WHITE, COLOR_RED); // Player Colors
 
   int width = 0;
@@ -103,6 +103,14 @@ int main(const int argc, char** argv){
       default:
         break;
     }
+
+    if(board.is_gem(player.get_position())){
+      screen_log("Gems Found: ", player.add_gem(), Position(height - 5, 0));
+      board.remove_gem(player.get_position());
+    }
+
+    if(player.carrying_max_gems())
+      running = false;
   }
 
   endwin();
